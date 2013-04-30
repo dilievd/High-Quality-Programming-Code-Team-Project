@@ -10,10 +10,8 @@ namespace Labyrinth
         public Game(Random rand, Ladder ladder)
         {
             Labyrinth labyrinth = new Labyrinth(rand);
-            
             UserInputAndOutput.PrintWelcomeMessage();
             int movesCount = 0;
-
             string input = "";
 
             while (!IsGameOver(labyrinth) && input != "restart")
@@ -31,16 +29,13 @@ namespace Labyrinth
                 {
                     Console.WriteLine(
                         UserInputAndOutput.ENTER_NAME_FOR_SCOREBOARD_MSG);
-
-
-
                     string name = Console.ReadLine();
                     ladder.AddResultInLadder(movesCount, name);
                 }
             }
+
             Console.WriteLine();
         }
-
 
         private bool IsGameOver(Labyrinth labyrinth)
         {
@@ -56,9 +51,6 @@ namespace Labyrinth
             }
 
             return isGameOver;
-
-
-
         }
 
         private bool TryMove(string direction, Labyrinth labyrinth)
@@ -85,9 +77,6 @@ namespace Labyrinth
                 default:
                     Console.WriteLine(UserInputAndOutput.INVALID_MOVE_MSG);
                     break;
-
-
-
             }
 
             if (moveDone == false)
@@ -115,6 +104,7 @@ namespace Labyrinth
                     {
                         movesCount++;
                     }
+
                     break;
                 case "top":
                     ladder.PrintLadder();

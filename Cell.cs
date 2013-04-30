@@ -26,6 +26,7 @@ namespace Labyrinth
             {
                 return true;
             }
+
             return false;
         }
     }

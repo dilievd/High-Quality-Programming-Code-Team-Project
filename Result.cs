@@ -23,6 +23,7 @@ namespace Labyrinth
                 return this.movesCount;
             }
         }
+
         public string PlayerName 
         {
             get

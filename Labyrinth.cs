@@ -12,15 +12,18 @@ namespace Labyrinth
         private readonly int LabyrinthStartCol = LABYRINTH_SIZE / 2;
         private Cell[,] labyrinth;
         public Cell currentCell;
+
         public Labyrinth(Random rand)
         {
             GenerateLabyrinth(rand);
             currentCell = labyrinth[LabyrintStartRow, LabyrintStartRow];
         }
+
         public Cell GetCell(int row, int col)
         {
             return labyrinth[row, col];
         }
+
         public bool TryMove(Cell cell, Direction direction)
         {
             int newRow;
@@ -88,9 +91,6 @@ namespace Labyrinth
 
             if (newRow < 0 || newCol < 0 ||
                 newRow >= labyrinth.GetLength(0) || newCol >= labyrinth.GetLength(1))
-
-
-
             {
                 return;
             }
@@ -110,9 +110,6 @@ namespace Labyrinth
         {
             bool exitFound = false;
             if (cell.Row == LABYRINTH_SIZE - 1 ||
-
-
-
                 cell.Col == LABYRINTH_SIZE - 1 ||
                 cell.Row == 0 ||
                 cell.Col == 0)
@@ -129,8 +126,8 @@ namespace Labyrinth
             Cell startCell = labyrinth[LabyrintStartRow, LabyrinthStartCol];
             cellsOrder.Enqueue(startCell);
             HashSet<Cell> visitedCells = new HashSet<Cell>();
-
             bool pathExists = false;
+
             while (cellsOrder.Count > 0)
             {
                 Cell currentCell = cellsOrder.Dequeue();
@@ -145,15 +142,13 @@ namespace Labyrinth
 
                 premestvane(currentCell, Direction.Down, cellsOrder,visitedCells);
                 premestvane(currentCell, Direction.Up, cellsOrder, visitedCells);
-
-
-
                 premestvane(currentCell, Direction.Left, cellsOrder, visitedCells);
                 premestvane(currentCell, Direction.Right, cellsOrder, visitedCells);
             }
 
             return pathExists;
         }
+
         private void GenerateLabyrinth(Random rand)
         {
             this.labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
@@ -163,7 +158,6 @@ namespace Labyrinth
                 for (int col = 0; col < LABYRINTH_SIZE; col++)
                 {
                     int cellRandomValue = rand.Next(0, 2);
-
                     char charValue;
                     if (cellRandomValue == 0)
                     {
@@ -173,11 +167,12 @@ namespace Labyrinth
                     {
                         charValue = Cell.CELL_WALL_VALUE;
                     }
+
                     this.labyrinth[row,col] = new Cell(row, col, charValue);
                 }
             }
-            this.labyrinth[LabyrintStartRow, LabyrinthStartCol ].ValueChar = '*';
 
+            this.labyrinth[LabyrintStartRow, LabyrinthStartCol ].ValueChar = '*';
             bool exitPathExists = ExitPathExists();
             if (!exitPathExists)
             {

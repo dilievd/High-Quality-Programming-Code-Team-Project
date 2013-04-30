@@ -38,10 +38,12 @@ namespace Labyrinth
             {
                 return true;
             }
+
             if (result < topResults.Max().MovesCount)
             {
                 return true;
             }
+
             return false;
         }
 
@@ -56,6 +58,7 @@ namespace Labyrinth
             {
                 topResults.Add(result);
             }
+
             topResults.Sort();
         }
     }
