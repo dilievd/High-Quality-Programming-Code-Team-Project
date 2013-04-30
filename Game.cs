@@ -13,7 +13,7 @@ namespace Labyrinth
 
             while (!IsGameOver(labyrinth) && input != "restart")
             {
-                UserInputAndOutput.PrinyLabyrinth(labyrinth);
+                Labyrinth.PrintLabyrinth(labyrinth);
                 input = UserInputAndOutput.GetInput();
                 ProccessInput(input, labyrinth, ref movesCount, ladder);
             }

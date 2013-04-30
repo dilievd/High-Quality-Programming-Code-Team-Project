@@ -179,6 +179,21 @@ namespace Labyrinth
                 GenerateLabyrinth(rand);
             }
         }
+
+        public static void PrintLabyrinth(Labyrinth labyrinth)
+        {
+            int labyrinthSize = Labyrinth.LABYRINTH_SIZE;
+            for (int row = 0; row < labyrinthSize; row++)
+            {
+                for (int col = 0; col < labyrinthSize; col++)
+                {
+                    Cell cell = labyrinth.GetCell(row, col);
+                    Console.Write(cell.ValueChar + " ");
+                }
+
+                Console.WriteLine();
+            }
+        }
     }
 
     public enum Direction {Up, Down, Left, Right};
