@@ -6,10 +6,8 @@ namespace Labyrinth
     class Labyrinth
     {
         public const int LABYRINTH_SIZE = 7;
-
         private readonly int LabyrintStartRow = LABYRINTH_SIZE / 2;
         private readonly int LabyrinthStartCol = LABYRINTH_SIZE / 2;
-
         private Cell[,] labyrinth;
         public Cell currentCell;
 
@@ -39,9 +37,6 @@ namespace Labyrinth
 
             if (!labyrinth[newRow, newCol].IsEmpty())
             {
-
-
-
                 return false;
             }
 
@@ -63,17 +58,11 @@ namespace Labyrinth
             }
             else if (direction == Direction.Down)
             {
-
-
-
                 newRow = newRow + 1;
             }
             else if (direction == Direction.Left)
             {
                 newCol = newCol - 1;
-
-
-
             }
             else if (direction == Direction.Right)
             {
@@ -134,8 +123,6 @@ namespace Labyrinth
                 visitedCells.Add(currentCell);
                 if (ExitFound(currentCell))
                 {
-
-
                     pathExists = true;
                     break;
                 }
@@ -195,6 +182,4 @@ namespace Labyrinth
             }
         }
     }
-
-    public enum Direction {Up, Down, Left, Right};
 }
