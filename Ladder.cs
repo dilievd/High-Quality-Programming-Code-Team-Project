@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Labyrinth
 {
     class Ladder
     {
         private const int TOP_RESULTS_CAPACITY = 5;
+
         private List<Result> topResults;
 
         public Ladder()

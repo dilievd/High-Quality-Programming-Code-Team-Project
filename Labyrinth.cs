@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Labyrinth
 {
     class Labyrinth
     {
         public const int LABYRINTH_SIZE = 7;
+
         private readonly int LabyrintStartRow = LABYRINTH_SIZE / 2;
         private readonly int LabyrinthStartCol = LABYRINTH_SIZE / 2;
+
         private Cell[,] labyrinth;
         public Cell currentCell;
 
