@@ -47,9 +47,9 @@ namespace Labyrinth
             return false;
         }
 
-        public void AddResultInLadder(int movesCount, string playerName)
+        public void AddResultInLadder(string playerName, int movesCount)
         {
-            Player result = new Player(movesCount, playerName);
+            Player result = new Player(playerName, movesCount);
             if (topResults.Count == topResults.Capacity)
             {
                 topResults[topResults.Count - 1] = result;

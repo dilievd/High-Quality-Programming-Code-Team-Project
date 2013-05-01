@@ -7,7 +7,7 @@ namespace Labyrinth
         private int movesCount; 
         private string playerName;
 
-        public Player(int movesCount, string playerName)
+        public Player(string playerName, int movesCount)
         {
             this.movesCount = movesCount;
             this.playerName = playerName;

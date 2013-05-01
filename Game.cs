@@ -26,7 +26,7 @@ namespace Labyrinth
                 {
                     Message.EnterNameForScoreBoard();
                     string name = Console.ReadLine();
-                    ladder.AddResultInLadder(movesCount, name);
+                    ladder.AddResultInLadder(name, movesCount);
                 }
             }
 
