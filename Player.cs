@@ -4,21 +4,13 @@ namespace Labyrinth
 {
     class  Player: IComparable<Player>
     {
-        private int movesCount; 
         private string playerName;
+        private int movesCount; 
 
         public Player(string playerName, int movesCount)
         {
-            this.movesCount = movesCount;
             this.playerName = playerName;
-        }
-
-        public int MovesCount 
-        {
-            get
-            {
-                return this.movesCount;
-            }
+            this.movesCount = movesCount;
         }
 
         public string PlayerName 
@@ -29,10 +21,18 @@ namespace Labyrinth
             }
         }
 
+        public int MovesCount
+        {
+            get
+            {
+                return this.movesCount;
+            }
+        }
+
         public int CompareTo(Player other)
         {
-            int compareResult = this.MovesCount.CompareTo(other.MovesCount);
-            return compareResult;
+            int comparePlayer = this.MovesCount.CompareTo(other.MovesCount);
+            return comparePlayer;
         }
     }
 }
