@@ -8,11 +8,11 @@ namespace Labyrinth
     {
         private const int TOP_RESULTS_CAPACITY = 5;
 
-        private List<Result> topResults;
+        private List<Player> topResults;
 
         public Ladder()
         {
-            topResults = new List<Result>();
+            topResults = new List<Player>();
             topResults.Capacity = TOP_RESULTS_CAPACITY;
         }
 
@@ -49,7 +49,7 @@ namespace Labyrinth
 
         public void AddResultInLadder(int movesCount, string playerName)
         {
-            Result result = new Result(movesCount, playerName);
+            Player result = new Player(movesCount, playerName);
             if (topResults.Count == topResults.Capacity)
             {
                 topResults[topResults.Count - 1] = result;
