@@ -57,8 +57,9 @@
     <Compile Include="LabTest.cs" />
     <Compile Include="Labyrinth.cs" />
     <Compile Include="Ladder.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Result.cs" />
-    <Compile Include="UserInputAndOutput.cs" />
+    <Compile Include="PlayerInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

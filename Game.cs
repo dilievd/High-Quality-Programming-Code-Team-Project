@@ -7,25 +7,24 @@ namespace Labyrinth
         public Game(Random rand, Ladder ladder)
         {
             Labyrinth labyrinth = new Labyrinth(rand);
-            UserInputAndOutput.PrintWelcomeMessage();
+            Message.Welcome();
             int movesCount = 0;
             string input = "";
 
             while (!IsGameOver(labyrinth) && input != "restart")
             {
                 Labyrinth.PrintLabyrinth(labyrinth);
-                input = UserInputAndOutput.GetInput();
+                input = PlayerInput.GetInput();
                 ProccessInput(input, labyrinth, ref movesCount, ladder);
             }
 
             if (input != "restart")
             {
                 Console.WriteLine("Congratulations! You escaped in {0} moves.",
-                    movesCount);
+                    movesCount); // Message.Win(movesCount); // 
                 if (ladder.ResultQualifiesInLadder(movesCount))
                 {
-                    Console.WriteLine(
-                        UserInputAndOutput.ENTER_NAME_FOR_SCOREBOARD_MSG);
+                    Message.EnterNameForScoreBoard();
                     string name = Console.ReadLine();
                     ladder.AddResultInLadder(movesCount, name);
                 }
@@ -72,13 +71,13 @@ namespace Labyrinth
                         labyrinth.TryMove(labyrinth.currentCell, Direction.Right);
                     break;
                 default:
-                    Console.WriteLine(UserInputAndOutput.INVALID_MOVE_MSG);
+                    Message.InvalidMove();
                     break;
             }
 
             if (moveDone == false)
             {
-                Console.WriteLine(UserInputAndOutput.INVALID_MOVE_MSG);
+                Message.InvalidMove();
             }
 
             return moveDone;
@@ -107,14 +106,13 @@ namespace Labyrinth
                     ladder.PrintLadder();
                     break;
                 case "exit":
-                    Console.WriteLine(UserInputAndOutput.GOODBYE_MSG);
+                    Message.GoodBye();
                     Environment.Exit(0);
                     break;
                 case "restart":
                     break;
                 default:
-                    string errorMessage = UserInputAndOutput.INVALID_COMMAND_MSG;
-                    Console.WriteLine(errorMessage);
+                    Message.InvalidCommand();
                     break;
             }
         }
