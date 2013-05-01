@@ -4,7 +4,7 @@ namespace Labyrinth
 {
     class Game
     {
-        public Game(Random rand, Ladder ladder)
+        public Game(Random rand, Scoreboard ladder)
         {
             Labyrinth labyrinth = new Labyrinth(rand);
             Message.Welcome();
@@ -22,11 +22,11 @@ namespace Labyrinth
             {
                 Console.WriteLine("Congratulations! You escaped in {0} moves.",
                     movesCount); // Message.Win(movesCount); // 
-                if (ladder.ResultQualifiesInLadder(movesCount))
+                if (ladder.PlayerQualifiesInScoreboard(movesCount))
                 {
                     Message.EnterNameForScoreBoard();
                     string name = Console.ReadLine();
-                    ladder.AddResultInLadder(name, movesCount);
+                    ladder.AddPlayerInScoreboard(name, movesCount);
                 }
             }
 
@@ -84,7 +84,7 @@ namespace Labyrinth
         }
 
         private void ProccessInput(string input, Labyrinth labyrinth,
-            ref int movesCount, Ladder ladder)
+            ref int movesCount, Scoreboard ladder)
         {
             string inputToLower = input.ToLower();
             switch (inputToLower)
@@ -103,7 +103,7 @@ namespace Labyrinth
 
                     break;
                 case "top":
-                    ladder.PrintLadder();
+                    ladder.PrintScoreBoard();
                     break;
                 case "exit":
                     Message.GoodBye();

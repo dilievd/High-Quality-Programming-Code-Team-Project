@@ -56,7 +56,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="LabTest.cs" />
     <Compile Include="Labyrinth.cs" />
-    <Compile Include="Ladder.cs" />
+    <Compile Include="Scoreboard.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerInput.cs" />
