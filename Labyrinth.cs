@@ -9,18 +9,13 @@ namespace Labyrinth
         public const int LABYRINTH_SIZE = 7;
         private readonly int StartRow = LABYRINTH_SIZE / 2;
         private readonly int StartColumn = LABYRINTH_SIZE / 2;
-        private Cell[,] labyrinth;
+        public Cell[,] labyrinth;
         public Cell currentCell;
 
         public Labyrinth(Random rand)
         {
             GenerateLabyrinth(rand);
             currentCell = labyrinth[StartRow, StartRow];
-        }
-
-        public Cell GetCell(int row, int col)
-        {
-            return labyrinth[row, col];
         }
 
         public bool TryMove(Cell cell, Direction direction)
@@ -41,8 +36,8 @@ namespace Labyrinth
                 return false;
             }
 
-            this.labyrinth[newRow, newCol].ValueChar = '*';
-            this.labyrinth[cell.Row, cell.Col].ValueChar = '-';
+            this.labyrinth[newRow, newCol].Symbol = '*';
+            this.labyrinth[cell.Row, cell.Col].Symbol = '-';
             this.currentCell = labyrinth[newRow, newCol];
             return true;
         }
@@ -160,7 +155,7 @@ namespace Labyrinth
                 }
             }
 
-            this.labyrinth[StartRow, StartColumn].ValueChar = PLAYER;
+            this.labyrinth[StartRow, StartColumn].Symbol = Labyrinth.PLAYER;
             bool exitPathExists = ExitPathExists();
             if (!exitPathExists)
             {
@@ -168,15 +163,14 @@ namespace Labyrinth
             }
         }
 
-        public static void PrintLabyrinth(Labyrinth labyrinth)
+        public void PrintLabyrinth()
         {
-            int labyrinthSize = Labyrinth.LABYRINTH_SIZE;
-            for (int row = 0; row < labyrinthSize; row++)
+            for (int row = 0; row < Labyrinth.LABYRINTH_SIZE; row++)
             {
-                for (int col = 0; col < labyrinthSize; col++)
+                for (int column = 0; column < Labyrinth.LABYRINTH_SIZE; column++)
                 {
-                    Cell cell = labyrinth.GetCell(row, col);
-                    Console.Write(cell.ValueChar + " ");
+                    Cell cell = this.labyrinth[row, column];
+                    Console.Write(cell.Symbol + " ");
                 }
 
                 Console.WriteLine();

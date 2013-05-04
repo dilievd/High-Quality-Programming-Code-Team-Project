@@ -9,18 +9,18 @@ namespace Labyrinth
 
         public int Row { get; set; }
         public int Col { get; set; }
-        public char ValueChar { get; set; }
+        public char Symbol { get; set; }
 
-        public Cell(int row, int col, char value)
+        public Cell(int row, int col, char symbol)
         {
             this.Row = row;
             this.Col = col;
-            this.ValueChar = value;
+            this.Symbol = symbol;
         }
 
         public bool IsEmpty()
         {
-            if(this.ValueChar == EMPTY_CELL)
+            if(this.Symbol == EMPTY_CELL)
             {
                 return true;
             }
