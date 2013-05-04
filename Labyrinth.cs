@@ -9,7 +9,7 @@ namespace Labyrinth
         public const int LABYRINTH_SIZE = 7;
         private readonly int StartRow = LABYRINTH_SIZE / 2;
         private readonly int StartColumn = LABYRINTH_SIZE / 2;
-        public Cell[,] labyrinth;
+        private Cell[,] labyrinth;
         public Cell currentCell;
 
         public Labyrinth(Random rand)
@@ -20,74 +20,68 @@ namespace Labyrinth
 
         public bool TryMove(Cell cell, Direction direction)
         {
-            int newRow;
-            int newCol;
-            FindNewCellCoordinates(cell.Row, cell.Col, direction,
-                out newRow, out newCol);
+            Cell nextCell = FindNextCell(cell, direction);
 
-            if (newRow < 0 || newCol < 0 ||
-                newRow >= labyrinth.GetLength(0) || newCol >= labyrinth.GetLength(1))
+            if (nextCell.Row < 0 || nextCell.Column < 0 ||
+                nextCell.Row >= labyrinth.GetLength(0) || nextCell.Column >= labyrinth.GetLength(1))
             {
                 return false;
             }
 
-            if (!labyrinth[newRow, newCol].IsEmpty())
+            if (!labyrinth[nextCell.Row, nextCell.Column].IsEmpty())
             {
                 return false;
             }
 
-            this.labyrinth[newRow, newCol].Symbol = '*';
-            this.labyrinth[cell.Row, cell.Col].Symbol = '-';
-            this.currentCell = labyrinth[newRow, newCol];
+            this.labyrinth[nextCell.Row, nextCell.Column] = nextCell;
+            this.currentCell = nextCell;
+            this.labyrinth[cell.Row, cell.Column].Symbol = '-';
             return true;
         }
 
-        private void FindNewCellCoordinates(int row, int col, Direction direction,
-            out int newRow, out int newCol)
+        private Cell FindNextCell(Cell cell, Direction direction)
         {
-            newRow = row;
-            newCol = col;
+            Cell nextCell = new Cell(cell.Row, cell.Column, cell.Symbol);
 
             if (direction == Direction.Up)
             {
-                newRow = newRow - 1;
+                nextCell.Row--;
             }
             else if (direction == Direction.Down)
             {
-                newRow = newRow + 1;
+                nextCell.Row++;
             }
             else if (direction == Direction.Left)
             {
-                newCol = newCol - 1;
+                nextCell.Column--;
             }
             else if (direction == Direction.Right)
             {
-                newCol = newCol + 1;
+                nextCell.Column++;
             }
+
+            return nextCell;
         }
 
         private void premestvane(Cell cell, Direction direction,
             Queue<Cell> cellsOrder, HashSet<Cell> visitedCells)
         {
-            int newRow;
-            int newCol;
-            FindNewCellCoordinates(cell.Row, cell.Col, direction,
-                out newRow, out newCol);
+            Cell nextCell = FindNextCell(cell, direction);
 
-            if (newRow < 0 || newCol < 0 ||
-                newRow >= labyrinth.GetLength(0) || newCol >= labyrinth.GetLength(1))
+            if (nextCell.Row < 0 || nextCell.Column < 0 ||
+                nextCell.Row >= labyrinth.GetLength(0) || nextCell.Column >= labyrinth.GetLength(1))
             {
                 return;
             }
 
-            if (visitedCells.Contains(labyrinth[newRow,newCol]))
+            if (visitedCells.Contains(labyrinth[nextCell.Row, nextCell.Column]))
             {
                 return;
             }
 
-            if (labyrinth[newRow, newCol].IsEmpty())
-            { 
-                cellsOrder.Enqueue(labyrinth[newRow, newCol]);
+            if (labyrinth[nextCell.Row, nextCell.Column].IsEmpty())
+            {
+                cellsOrder.Enqueue(labyrinth[nextCell.Row, nextCell.Column]);
             }
         }
 
@@ -95,9 +89,9 @@ namespace Labyrinth
         {
             bool exitFound = false;
             if (cell.Row == LABYRINTH_SIZE - 1 ||
-                cell.Col == LABYRINTH_SIZE - 1 ||
+                cell.Column == LABYRINTH_SIZE - 1 ||
                 cell.Row == 0 ||
-                cell.Col == 0)
+                cell.Column == 0)
             {
                 exitFound = true;
             }

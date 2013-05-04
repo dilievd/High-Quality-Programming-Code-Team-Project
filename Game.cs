@@ -37,7 +37,7 @@ namespace Labyrinth
         {
             bool isGameOver = false;
             int currentRow = labyrinth.currentCell.Row;
-            int currentCol = labyrinth.currentCell.Col;
+            int currentCol = labyrinth.currentCell.Column;
             if (currentRow == 0 ||
                 currentCol == 0 ||
                 currentRow == Labyrinth.LABYRINTH_SIZE - 1 ||
