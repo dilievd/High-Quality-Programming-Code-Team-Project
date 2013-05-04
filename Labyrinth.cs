@@ -5,16 +5,17 @@ namespace Labyrinth
 {
     class Labyrinth
     {
+        public const char PLAYER = '*';
         public const int LABYRINTH_SIZE = 7;
-        private readonly int LabyrintStartRow = LABYRINTH_SIZE / 2;
-        private readonly int LabyrinthStartCol = LABYRINTH_SIZE / 2;
+        private readonly int StartRow = LABYRINTH_SIZE / 2;
+        private readonly int StartColumn = LABYRINTH_SIZE / 2;
         private Cell[,] labyrinth;
         public Cell currentCell;
 
         public Labyrinth(Random rand)
         {
             GenerateLabyrinth(rand);
-            currentCell = labyrinth[LabyrintStartRow, LabyrintStartRow];
+            currentCell = labyrinth[StartRow, StartRow];
         }
 
         public Cell GetCell(int row, int col)
@@ -112,7 +113,7 @@ namespace Labyrinth
         private bool ExitPathExists()
         {
             Queue<Cell> cellsOrder = new Queue<Cell>();
-            Cell startCell = labyrinth[LabyrintStartRow, LabyrinthStartCol];
+            Cell startCell = labyrinth[StartRow, StartColumn];
             cellsOrder.Enqueue(startCell);
             HashSet<Cell> visitedCells = new HashSet<Cell>();
             bool pathExists = false;
@@ -142,24 +143,24 @@ namespace Labyrinth
 
             for (int row = 0; row < LABYRINTH_SIZE; row++)
             {
-                for (int col = 0; col < LABYRINTH_SIZE; col++)
+                for (int column = 0; column < LABYRINTH_SIZE; column++)
                 {
-                    int cellRandomValue = rand.Next(0, 2);
+                    int randomValue = rand.Next(0, 2);
                     char charValue;
-                    if (cellRandomValue == 0)
+                    if (randomValue == 0)
                     {
-                        charValue = Cell.CELL_EMPTY_VALUE;
+                        charValue = Cell.EMPTY_CELL;
                     }
                     else
                     {
-                        charValue = Cell.CELL_WALL_VALUE;
+                        charValue = Cell.WALL_CELL;
                     }
 
-                    this.labyrinth[row,col] = new Cell(row, col, charValue);
+                    this.labyrinth[row,column] = new Cell(row, column, charValue);
                 }
             }
 
-            this.labyrinth[LabyrintStartRow, LabyrinthStartCol ].ValueChar = '*';
+            this.labyrinth[StartRow, StartColumn].ValueChar = PLAYER;
             bool exitPathExists = ExitPathExists();
             if (!exitPathExists)
             {

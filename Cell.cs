@@ -4,8 +4,8 @@ namespace Labyrinth
 {
     class Cell
     {
-        public const char CELL_EMPTY_VALUE = '-';
-        public const char CELL_WALL_VALUE = 'X';
+        public const char EMPTY_CELL = '-';
+        public const char WALL_CELL = 'X';
 
         public int Row { get; set; }
         public int Col { get; set; }
@@ -20,7 +20,7 @@ namespace Labyrinth
 
         public bool IsEmpty()
         {
-            if(this.ValueChar == CELL_EMPTY_VALUE)
+            if(this.ValueChar == EMPTY_CELL)
             {
                 return true;
             }
