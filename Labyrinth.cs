@@ -57,15 +57,64 @@ namespace Labyrinth
             this.labyrinth[row, column] = new Cell(row, column, symbol);
         }
 
-        public bool TryMove(Cell cell, Direction direction)
+        private bool IsExitPath()
         {
-            Cell nextCell = FindNextCell(cell, direction);
+            Queue<Cell> cellsOrder = new Queue<Cell>();
+            Cell startCell = labyrinth[StartRow, StartColumn];
+            cellsOrder.Enqueue(startCell);
+            HashSet<Cell> visitedCells = new HashSet<Cell>();
+            bool pathExists = false;
+
+            while (cellsOrder.Count > 0)
+            {
+                Cell currentCell = cellsOrder.Dequeue();
+                visitedCells.Add(currentCell);
+                if (ExitFound(currentCell))
+                {
+                    pathExists = true;
+                    break;
+                }
+
+                CheckNeighbor(currentCell, Direction.Down, cellsOrder, visitedCells);
+                CheckNeighbor(currentCell, Direction.Up, cellsOrder, visitedCells);
+                CheckNeighbor(currentCell, Direction.Left, cellsOrder, visitedCells);
+                CheckNeighbor(currentCell, Direction.Right, cellsOrder, visitedCells);
+            }
+
+            return pathExists;
+        }
+
+        private void CheckNeighbor(Cell cell, Direction direction,
+            Queue<Cell> cellsOrder, HashSet<Cell> visitedCells)
+        {
+            Cell nextCell = GoToNextCell(cell, direction);
 
             if (nextCell.Row < 0 || nextCell.Column < 0 ||
                 nextCell.Row >= labyrinth.GetLength(0) || nextCell.Column >= labyrinth.GetLength(1))
             {
-                return false;
+                return;
             }
+
+            if (visitedCells.Contains(labyrinth[nextCell.Row, nextCell.Column]))
+            {
+                return;
+            }
+
+            if (labyrinth[nextCell.Row, nextCell.Column].IsEmpty())
+            {
+                cellsOrder.Enqueue(labyrinth[nextCell.Row, nextCell.Column]);
+            }
+        }
+
+        public bool TryMove(Cell cell, Direction direction)
+        {
+            Cell nextCell = GoToNextCell(cell, direction);
+
+            //if (nextCell.Row < 0 || nextCell.Column < 0 ||
+            //    nextCell.Row >= labyrinth.GetLength(0) || nextCell.Column >= labyrinth.GetLength(1))
+            //{
+            //    return false;
+            //}
 
             if (!labyrinth[nextCell.Row, nextCell.Column].IsEmpty())
             {
@@ -78,7 +127,7 @@ namespace Labyrinth
             return true;
         }
 
-        private Cell FindNextCell(Cell cell, Direction direction)
+        private Cell GoToNextCell(Cell cell, Direction direction)
         {
             Cell nextCell = new Cell(cell.Row, cell.Column, cell.Symbol);
 
@@ -105,64 +154,14 @@ namespace Labyrinth
         private bool ExitFound(Cell cell)
         {
             bool exitFound = false;
-            if (cell.Row == LABYRINTH_SIZE - 1 ||
-                cell.Column == LABYRINTH_SIZE - 1 ||
-                cell.Row == 0 ||
-                cell.Column == 0)
+            bool rowBorder = cell.Row == Labyrinth.LABYRINTH_SIZE - 1 || cell.Row == 0;
+            bool columnBorder = cell.Column == Labyrinth.LABYRINTH_SIZE - 1 || cell.Column == 0;
+            if (rowBorder || columnBorder)
             {
                 exitFound = true;
             }
 
             return exitFound;
-        }
-
-        private bool IsExitPath()
-        {
-            Queue<Cell> cellsOrder = new Queue<Cell>();
-            Cell startCell = labyrinth[StartRow, StartColumn];
-            cellsOrder.Enqueue(startCell);
-            HashSet<Cell> visitedCells = new HashSet<Cell>();
-            bool pathExists = false;
-
-            while (cellsOrder.Count > 0)
-            {
-                Cell currentCell = cellsOrder.Dequeue();
-                visitedCells.Add(currentCell);
-                if (ExitFound(currentCell))
-                {
-                    pathExists = true;
-                    break;
-                }
-
-                CheckNeighbor(currentCell, Direction.Down, cellsOrder,visitedCells);
-                CheckNeighbor(currentCell, Direction.Up, cellsOrder, visitedCells);
-                CheckNeighbor(currentCell, Direction.Left, cellsOrder, visitedCells);
-                CheckNeighbor(currentCell, Direction.Right, cellsOrder, visitedCells);
-            }
-
-            return pathExists;
-        }
-
-        private void CheckNeighbor(Cell cell, Direction direction,
-            Queue<Cell> cellsOrder, HashSet<Cell> visitedCells)
-        {
-            Cell nextCell = FindNextCell(cell, direction);
-
-            if (nextCell.Row < 0 || nextCell.Column < 0 ||
-                nextCell.Row >= labyrinth.GetLength(0) || nextCell.Column >= labyrinth.GetLength(1))
-            {
-                return;
-            }
-
-            if (visitedCells.Contains(labyrinth[nextCell.Row, nextCell.Column]))
-            {
-                return;
-            }
-
-            if (labyrinth[nextCell.Row, nextCell.Column].IsEmpty())
-            {
-                cellsOrder.Enqueue(labyrinth[nextCell.Row, nextCell.Column]);
-            }
         }
 
         public void PrintLabyrinth()
