@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Labyrinth
 {
-    class Labyrinth
+    class LabyrinthEngine
     {
         public const char PLAYER = '*';
         public const int LABYRINTH_SIZE = 7;
@@ -15,7 +15,7 @@ namespace Labyrinth
 
         public Cell CurrentCell { get; private set; }
 
-        public Labyrinth(Random rand)
+        public LabyrinthEngine(Random rand)
         {
             GenerateLabyrinth(rand);
             CurrentCell = labyrinth[StartRow, StartRow];
@@ -34,7 +34,7 @@ namespace Labyrinth
                 }
             }
 
-            this.labyrinth[StartRow, StartColumn].Symbol = Labyrinth.PLAYER;
+            this.labyrinth[StartRow, StartColumn].Symbol = LabyrinthEngine.PLAYER;
             bool isExitPath = IsExitPath();
             if (!isExitPath)
             {
@@ -154,8 +154,8 @@ namespace Labyrinth
         private bool ExitFound(Cell cell)
         {
             bool exitFound = false;
-            bool rowBorder = cell.Row == Labyrinth.LABYRINTH_SIZE - 1 || cell.Row == 0;
-            bool columnBorder = cell.Column == Labyrinth.LABYRINTH_SIZE - 1 || cell.Column == 0;
+            bool rowBorder = cell.Row == LabyrinthEngine.LABYRINTH_SIZE - 1 || cell.Row == 0;
+            bool columnBorder = cell.Column == LabyrinthEngine.LABYRINTH_SIZE - 1 || cell.Column == 0;
             if (rowBorder || columnBorder)
             {
                 exitFound = true;
@@ -166,9 +166,9 @@ namespace Labyrinth
 
         public void PrintLabyrinth()
         {
-            for (int row = 0; row < Labyrinth.LABYRINTH_SIZE; row++)
+            for (int row = 0; row < LabyrinthEngine.LABYRINTH_SIZE; row++)
             {
-                for (int column = 0; column < Labyrinth.LABYRINTH_SIZE; column++)
+                for (int column = 0; column < LabyrinthEngine.LABYRINTH_SIZE; column++)
                 {
                     Cell cell = this.labyrinth[row, column];
                     Console.Write(cell.Symbol + " ");

@@ -6,7 +6,7 @@ namespace Labyrinth
     {
         public Game(Random rand, Scoreboard ladder)
         {
-            Labyrinth labyrinth = new Labyrinth(rand);
+            LabyrinthEngine labyrinth = new LabyrinthEngine(rand);
             Message.Welcome();
             int movesCount = 0;
             string input = "";
@@ -33,15 +33,15 @@ namespace Labyrinth
             Console.WriteLine();
         }
 
-        private bool IsGameOver(Labyrinth labyrinth)
+        private bool IsGameOver(LabyrinthEngine labyrinth)
         {
             bool isGameOver = false;
             int currentRow = labyrinth.CurrentCell.Row;
             int currentCol = labyrinth.CurrentCell.Column;
             if (currentRow == 0 ||
                 currentCol == 0 ||
-                currentRow == Labyrinth.LABYRINTH_SIZE - 1 ||
-                currentCol == Labyrinth.LABYRINTH_SIZE - 1)
+                currentRow == LabyrinthEngine.LABYRINTH_SIZE - 1 ||
+                currentCol == LabyrinthEngine.LABYRINTH_SIZE - 1)
             {
                 isGameOver = true;
             }
@@ -49,7 +49,7 @@ namespace Labyrinth
             return isGameOver;
         }
 
-        private bool TryMove(string direction, Labyrinth labyrinth)
+        private bool TryMove(string direction, LabyrinthEngine labyrinth)
         {
             bool moveDone = false;
             switch (direction)
@@ -83,7 +83,7 @@ namespace Labyrinth
             return moveDone;
         }
 
-        private void ProccessInput(string input, Labyrinth labyrinth,
+        private void ProccessInput(string input, LabyrinthEngine labyrinth,
             ref int movesCount, Scoreboard ladder)
         {
             string inputToLower = input.ToLower();
