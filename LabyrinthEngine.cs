@@ -48,17 +48,19 @@ namespace Labyrinth
 
         private void FillCell(int randomValue, int row, int column)
         {
-            char symbol;
+            //char symbol;
             if (randomValue == 0)
             {
-                symbol = Cell.EMPTY_CELL;
+                this.labyrinth[row, column] = new Cell(row, column, Cell.EMPTY_CELL);
+                //symbol = Cell.EMPTY_CELL;
             }
             else
             {
-                symbol = Cell.WALL_CELL;
+                this.labyrinth[row, column] = new Cell(row, column, Cell.WALL_CELL);
+                //symbol = Cell.WALL_CELL;
             }
 
-            this.labyrinth[row, column] = new Cell(row, column, symbol);
+            //this.labyrinth[row, column] = new Cell(row, column, symbol);
         }
 
         private bool IsExitPath()
@@ -122,16 +124,17 @@ namespace Labyrinth
             //{
             //    return false;
             //}
-
-            if (!labyrinth[nextCell.Row, nextCell.Column].IsEmpty())
+            bool moveDone = false;
+            bool isEmpty = labyrinth[nextCell.Row, nextCell.Column].IsEmpty();
+            if (isEmpty)
             {
-                return false;
+                moveDone = true;
+                this.CurrentCell = nextCell;
+                this.labyrinth[nextCell.Row, nextCell.Column].Symbol = PLAYER;
+                this.labyrinth[cell.Row, cell.Column].Symbol = Cell.EMPTY_CELL;
             }
 
-            this.labyrinth[nextCell.Row, nextCell.Column] = nextCell;
-            this.CurrentCell = nextCell;
-            this.labyrinth[cell.Row, cell.Column].Symbol = '-';
-            return true;
+            return moveDone;
         }
 
         private Cell GoToNextCell(Cell cell, Direction direction)
