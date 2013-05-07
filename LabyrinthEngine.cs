@@ -18,13 +18,22 @@ namespace Labyrinth
         public LabyrinthEngine(Random rand)
         {
             GenerateLabyrinth(rand);
-            CurrentCell = labyrinth[StartRow, StartRow];
+            CurrentCell = labyrinth[this.StartRow, this.StartRow];
         }
 
         private void GenerateLabyrinth(Random rand)
         {
-            this.labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
+            CreateLabyrinth(rand);
+            //bool isExitPath = this.IsExitPath();
+            if (!this.IsExitPath())
+            {
+                GenerateLabyrinth(rand);
+            }
+        }
 
+        private void CreateLabyrinth(Random rand)
+        {
+            this.labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
             for (int row = 0; row < LABYRINTH_SIZE; row++)
             {
                 for (int column = 0; column < LABYRINTH_SIZE; column++)
@@ -34,12 +43,7 @@ namespace Labyrinth
                 }
             }
 
-            this.labyrinth[StartRow, StartColumn].Symbol = LabyrinthEngine.PLAYER;
-            bool isExitPath = IsExitPath();
-            if (!isExitPath)
-            {
-                GenerateLabyrinth(rand);
-            }
+            this.labyrinth[this.StartRow, this.StartColumn].Symbol = LabyrinthEngine.PLAYER;
         }
 
         private void FillCell(int randomValue, int row, int column)
@@ -60,10 +64,10 @@ namespace Labyrinth
         private bool IsExitPath()
         {
             Queue<Cell> cellsOrder = new Queue<Cell>();
-            Cell startCell = labyrinth[StartRow, StartColumn];
+            Cell startCell = labyrinth[this.StartRow, this.StartColumn];
             cellsOrder.Enqueue(startCell);
             HashSet<Cell> visitedCells = new HashSet<Cell>();
-            bool pathExists = false;
+            bool isExitPath = false;
 
             while (cellsOrder.Count > 0)
             {
@@ -71,7 +75,7 @@ namespace Labyrinth
                 visitedCells.Add(currentCell);
                 if (ExitFound(currentCell))
                 {
-                    pathExists = true;
+                    isExitPath = true;
                     break;
                 }
 
@@ -81,26 +85,29 @@ namespace Labyrinth
                 CheckNeighbor(currentCell, Direction.Right, cellsOrder, visitedCells);
             }
 
-            return pathExists;
+            return isExitPath;
         }
 
         private void CheckNeighbor(Cell cell, Direction direction,
             Queue<Cell> cellsOrder, HashSet<Cell> visitedCells)
         {
             Cell nextCell = GoToNextCell(cell, direction);
+            bool isInnerCell = nextCell.Row >= 0 || nextCell.Row < labyrinth.GetLength(0) || 
+                nextCell.Column >= 0 || nextCell.Column < labyrinth.GetLength(1);
+            bool isVisited = visitedCells.Contains(labyrinth[nextCell.Row, nextCell.Column]);
+            bool isEmpty = labyrinth[nextCell.Row, nextCell.Column].IsEmpty();
+            //if (nextCell.Row < 0 || nextCell.Column < 0 ||
+            //    nextCell.Row >= labyrinth.GetLength(0) || nextCell.Column >= labyrinth.GetLength(1))
+            //{
+            //    return;
+            //}
 
-            if (nextCell.Row < 0 || nextCell.Column < 0 ||
-                nextCell.Row >= labyrinth.GetLength(0) || nextCell.Column >= labyrinth.GetLength(1))
-            {
-                return;
-            }
+            //if (visitedCells.Contains(labyrinth[nextCell.Row, nextCell.Column]))
+            //{
+            //    return;
+            //}
 
-            if (visitedCells.Contains(labyrinth[nextCell.Row, nextCell.Column]))
-            {
-                return;
-            }
-
-            if (labyrinth[nextCell.Row, nextCell.Column].IsEmpty())
+            if (isInnerCell && !isVisited && isEmpty)
             {
                 cellsOrder.Enqueue(labyrinth[nextCell.Row, nextCell.Column]);
             }
