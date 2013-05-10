@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Labyrinth
 {
-    class LabyrinthEngine
+    public class LabyrinthEngine
     {
         public const int LABYRINTH_SIZE = 7;
         private readonly int startRow = LABYRINTH_SIZE / 2;

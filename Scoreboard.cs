@@ -27,7 +27,7 @@ namespace Labyrinth
                 for (int index = 0; index < topScores.Count; index++)
                 {
                     Console.WriteLine("{0}. {1} --> {2} moves", index + 1,
-                        topScores[index].PlayerName, topScores[index].MovesCount);
+                        topScores[index].Name, topScores[index].MovesCount);
                 }
             }
         }

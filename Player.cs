@@ -4,28 +4,42 @@ namespace Labyrinth
 {
     class  Player: IComparable<Player>
     {
-        private string playerName;
+        private string name;
         private int movesCount; 
 
-        public Player(string playerName, int movesCount)
+        public Player(string name, int movesCount)
         {
-            this.playerName = playerName;
-            this.movesCount = movesCount;
+            this.Name = name;
+            this.MovesCount = movesCount;
         }
 
-        public string PlayerName 
+        public string Name 
         {
-            get
+            get { return this.name; }
+            private set
             {
-                return this.playerName;
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException(
+                        "Invalid input! Name cannot be null or empty!");
+                }
+
+                this.name = value;
             }
         }
 
         public int MovesCount
         {
-            get
+            get { return this.movesCount; }
+            private set
             {
-                return this.movesCount;
+                if (value < LabyrinthEngine.LABYRINTH_SIZE / 2)
+                {
+                    throw new ArgumentOutOfRangeException("Can't escape from labyrinth in " + 
+                        "less moves than the shortest distance from center of the labyrinth!");
+                }
+
+                this.movesCount = value;
             }
         }
 
