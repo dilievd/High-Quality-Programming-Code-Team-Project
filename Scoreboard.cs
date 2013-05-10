@@ -32,11 +32,11 @@ namespace Labyrinth
         public bool IsTopResult(int result)
         {
             bool isTopResult = false;
-            if (topPlayers.Count < NUMBER_TOP_RESULTS)
+            if (this.topPlayers.Count < NUMBER_TOP_RESULTS)
             {
                 isTopResult = true;
             }
-            else if (result < topPlayers.Max().MovesCount)
+            else if (result < this.topPlayers.Max().MovesCount)
             {
                 isTopResult = true;
             }
@@ -47,13 +47,13 @@ namespace Labyrinth
         public override string ToString()
         {
             StringBuilder resultList = new StringBuilder();
-            if (topPlayers.Count == 0)
+            if (this.topPlayers.Count == 0)
             {
                 resultList.Append(Message.ScoreBoardEmpty);
             }
             else
             {
-                for (int index = 0; index < topPlayers.Count; index++)
+                for (int index = 0; index < this.topPlayers.Count; index++)
                 {
                     string currentResult = string.Format("{0}. {1} --> {2} moves",
                         index + 1, topPlayers[index].Name, topPlayers[index].MovesCount);

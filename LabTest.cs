@@ -9,7 +9,7 @@ namespace Labyrinth
         {
             Scoreboard ladder = new Scoreboard();
           
-            while (1 == 1)
+            while (true)
             {
                 Game game = new Game(ladder);
             }

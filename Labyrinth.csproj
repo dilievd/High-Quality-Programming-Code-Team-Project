@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cell.cs" />
-    <Compile Include="ConsoleOutput.cs" />
+    <Compile Include="ConsoleIO.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="LabTest.cs" />
@@ -60,7 +60,6 @@
     <Compile Include="Scoreboard.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="PlayerInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
