@@ -17,7 +17,7 @@ namespace Labyrinth
         public LabyrinthEngine(Random rand)
         {
             GenerateLabyrinth(rand);
-            CurrentCell = labyrinth[this.startRow, this.startRow];
+            CurrentCell = labyrinth[this.startRow, this.startColumn];
         }
 
         private void GenerateLabyrinth(Random rand)
@@ -127,8 +127,8 @@ namespace Labyrinth
         private bool ExitFound(Cell cell)
         {
             bool exitFound = false;
-            bool rowBorder = cell.Row == LabyrinthEngine.LABYRINTH_SIZE - 1 || cell.Row == 0;
-            bool columnBorder = cell.Column == LabyrinthEngine.LABYRINTH_SIZE - 1 || cell.Column == 0;
+            bool rowBorder = (cell.Row == LabyrinthEngine.LABYRINTH_SIZE - 1 || cell.Row == 0);
+            bool columnBorder = (cell.Column == LabyrinthEngine.LABYRINTH_SIZE - 1 || cell.Column == 0);
             if (rowBorder || columnBorder)
             {
                 exitFound = true;
