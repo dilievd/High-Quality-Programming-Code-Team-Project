@@ -6,7 +6,7 @@ namespace Labyrinth
     {
         public static string GetInput()
         {
-            ConsoleOutput.Print(Message.EnterMoveMsg, false);
+            ConsoleOutput.Print(Message.EnterMove, false);
             string inputLine = Console.ReadLine();
             return inputLine;
         }

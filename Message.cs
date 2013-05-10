@@ -4,63 +4,63 @@ namespace Labyrinth
 {
     internal struct Message
     {
-        private static string invalidMoveMsg = "Invalid move!";
-        private static string welcomeMsg = "Welcome to \"Labyrinth\" game. \n" +
+        private static string invalidMove = "Invalid move!";
+        private static string welcome = "Welcome to \"Labyrinth\" game. \n" +
             "Please try to escape. \n" +
             "Use 'top' to view the top scoreboard, 'restart' to start a new game and 'exit' to quit the game.\n";
-        private static string enterMoveMsg = "\nEnter your move (L=left, R-right, U=up, D=down): ";
-        private static string enterNameForScoreBoardMsg = "\nPlease enter your name for the top scoreboard: ";
-        private static string scoreBoardEmptyMsg = "The scoreboard is empty.";
-        private static string invalidCommandMsg = "\nInvalid command!\n";
-        private static string goodByeMsg = "Good Bye";
+        private static string enterMove = "\nEnter your move (L=left, R-right, U=up, D=down): ";
+        private static string enterNameForScoreBoard = "\nPlease enter your name for the top scoreboard: ";
+        private static string scoreBoardEmpty = "The scoreboard is empty.";
+        private static string invalidCommand = "\nInvalid command!\n";
+        private static string goodBye = "Good Bye";
 
-        internal static string InvalidMoveMsg
+        internal static string InvalidMove
         {
             get 
             {
-                return invalidMoveMsg; 
+                return invalidMove; 
             }            
         }        
-        internal static string InvalidCommandMsg
+        internal static string InvalidCommand
         {
             get
             {
-                return invalidCommandMsg; 
+                return invalidCommand; 
             }            
         }        
-        internal static string ScoreBoardEmptyMsg
+        internal static string ScoreBoardEmpty
         {
             get
             {
-                return scoreBoardEmptyMsg; 
+                return scoreBoardEmpty; 
             }           
         }
-        internal static string EnterNameForScoreBoardMsg
+        internal static string EnterNameForScoreBoard
         {
             get 
             {
-                return enterNameForScoreBoardMsg; 
+                return enterNameForScoreBoard; 
             }            
         }        
-        internal static string GoodByeMsg
+        internal static string GoodBye
         {
             get 
             {
-                return goodByeMsg;
+                return goodBye;
             }            
         }
-        internal static string EnterMoveMsg
+        internal static string EnterMove
         {
             get
             {
-                return enterMoveMsg; 
+                return enterMove; 
             }            
         }        
-        internal static string WelcomeMsg
+        internal static string Welcome
         {
             get 
             {
-                return welcomeMsg; 
+                return welcome; 
             }
         }
     }

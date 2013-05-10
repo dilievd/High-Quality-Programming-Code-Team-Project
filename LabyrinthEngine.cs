@@ -21,12 +21,11 @@ namespace Labyrinth
         }
 
         private void GenerateLabyrinth()
-        {
-            CreateLabyrinth();
-            if (!this.IsExitPath())
+        {    
+            do
             {
-                GenerateLabyrinth();
-            }
+                CreateLabyrinth();
+            } while (!this.HasExit());
         }
 
         private void CreateLabyrinth()
@@ -45,7 +44,7 @@ namespace Labyrinth
             this.labyrinth[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn);
         }
 
-        private bool IsExitPath()
+        private bool HasExit()
         {
             Queue<Cell> cellsOrder = new Queue<Cell>();
             Cell startCell = labyrinth[this.startRow, this.startColumn];

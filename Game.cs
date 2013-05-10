@@ -7,7 +7,7 @@ namespace Labyrinth
         public Game(Scoreboard ladder)
         {
             LabyrinthEngine labyrinth = new LabyrinthEngine();
-            ConsoleOutput.Print(Message.WelcomeMsg, true);
+            ConsoleOutput.Print(Message.Welcome, true);
             int movesCount = 0;
             string input = "";
 
@@ -25,7 +25,7 @@ namespace Labyrinth
                     movesCount); // Message.Win(movesCount); // 
                 if (ladder.PlayerQualifiesInScoreboard(movesCount))
                 {                    
-                    ConsoleOutput.Print(Message.EnterNameForScoreBoardMsg, false);
+                    ConsoleOutput.Print(Message.EnterNameForScoreBoard, false);
                     string name = Console.ReadLine();
                     ladder.AddPlayerInScoreboard(name, movesCount);
                 }
@@ -72,13 +72,13 @@ namespace Labyrinth
                         labyrinth.TryMove(labyrinth.CurrentCell, Direction.Right);
                     break;
                 default:
-                    ConsoleOutput.Print(Message.InvalidMoveMsg, true);
+                    ConsoleOutput.Print(Message.InvalidMove, true);
                     break;
             }
 
             if (moveDone == false)
             {
-                ConsoleOutput.Print(Message.InvalidMoveMsg, true);
+                ConsoleOutput.Print(Message.InvalidMove, true);
             }
 
             return moveDone;
@@ -107,13 +107,13 @@ namespace Labyrinth
                     ladder.PrintScoreBoard();
                     break;
                 case "exit":
-                    ConsoleOutput.Print(Message.GoodByeMsg, true);
+                    ConsoleOutput.Print(Message.GoodBye, true);
                     Environment.Exit(0);
                     break;
                 case "restart":
                     break;
                 default:
-                    ConsoleOutput.Print(Message.InvalidCommandMsg, true);
+                    ConsoleOutput.Print(Message.InvalidCommand, true);
                     break;
             }
         }
