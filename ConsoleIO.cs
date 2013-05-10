@@ -7,15 +7,16 @@ namespace Labyrinth
 {
     internal static class ConsoleIO
     {
-        internal static void Print(string info, bool moveOnNewLine) 
+        internal static void Print(string info, bool moveOnNewLine, params string[] holder) 
         {
+            string message = string.Format(info, holder);
             if (moveOnNewLine)
             {
-                Console.WriteLine(info);
+                Console.WriteLine(message);
             }
             else
             {
-                Console.Write(info);
+                Console.Write(message);
             }            
         }
 
