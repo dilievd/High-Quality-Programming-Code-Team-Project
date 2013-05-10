@@ -23,11 +23,12 @@ namespace Labyrinth
             {
                 Console.WriteLine("Congratulations! You escaped in {0} moves.",
                     movesCount); // Message.Win(movesCount); // 
-                if (ladder.PlayerQualifiesInScoreboard(movesCount))
-                {                    
+                if (ladder.IsTopResult(movesCount))
+                {
                     ConsoleOutput.Print(Message.EnterNameForScoreBoard, false);
                     string name = Console.ReadLine();
-                    ladder.AddPlayerInScoreboard(name, movesCount);
+                    Player currentPlayer = new Player(name, movesCount);
+                    ladder.AddPlayer(currentPlayer);
                 }
             }
 
@@ -104,7 +105,7 @@ namespace Labyrinth
 
                     break;
                 case "top":
-                    ladder.PrintScoreBoard();
+                    ConsoleOutput.Print(ladder.ToString(), true);
                     break;
                 case "exit":
                     ConsoleOutput.Print(Message.GoodBye, true);

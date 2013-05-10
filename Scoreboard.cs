@@ -1,65 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Labyrinth
 {
     class Scoreboard
     {
-        private const int TOP_RESULTS_CAPACITY = 5;
-
-        private List<Player> topScores;
+        private const int NUMBER_TOP_RESULTS = 5;
+        private List<Player> topPlayers;
 
         public Scoreboard()
         {
-            topScores = new List<Player>();
-            topScores.Capacity = TOP_RESULTS_CAPACITY;
+            topPlayers = new List<Player>(NUMBER_TOP_RESULTS);
         }
 
-        public void PrintScoreBoard()
+        public void AddPlayer(Player player)
         {
-            if (topScores.Count == 0)
+            if (this.topPlayers.Count == NUMBER_TOP_RESULTS)
             {
-                ConsoleOutput.Print(Message.ScoreBoardEmpty, true);
+                this.topPlayers[NUMBER_TOP_RESULTS - 1] = player;
             }
             else
             {
-                for (int index = 0; index < topScores.Count; index++)
+                this.topPlayers.Add(player);
+            }
+
+            this.topPlayers.Sort();
+        }
+
+        public bool IsTopResult(int result)
+        {
+            bool isTopResult = false;
+            if (topPlayers.Count < NUMBER_TOP_RESULTS)
+            {
+                isTopResult = true;
+            }
+            else if (result < topPlayers.Max().MovesCount)
+            {
+                isTopResult = true;
+            }
+
+            return isTopResult;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder resultList = new StringBuilder();
+            if (topPlayers.Count == 0)
+            {
+                resultList.Append(Message.ScoreBoardEmpty);
+            }
+            else
+            {
+                for (int index = 0; index < topPlayers.Count; index++)
                 {
-                    Console.WriteLine("{0}. {1} --> {2} moves", index + 1,
-                        topScores[index].Name, topScores[index].MovesCount);
+                    string currentResult = string.Format("{0}. {1} --> {2} moves",
+                        index + 1, topPlayers[index].Name, topPlayers[index].MovesCount);
+                    resultList.Append(currentResult);
                 }
             }
-        }
 
-        public bool PlayerQualifiesInScoreboard(int result)
-        {
-            if (topScores.Count < TOP_RESULTS_CAPACITY )
-            {
-                return true;
-            }
-
-            if (result < topScores.Max().MovesCount)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public void AddPlayerInScoreboard(string playerName, int movesCount)
-        {
-            Player player = new Player(playerName, movesCount);
-            if (topScores.Count == topScores.Capacity)
-            {
-                topScores[topScores.Count - 1] = player;
-            }
-            else
-            {
-                topScores.Add(player);
-            }
-
-            topScores.Sort();
+            return resultList.ToString();
         }
     }
 }
