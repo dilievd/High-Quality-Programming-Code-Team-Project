@@ -7,14 +7,16 @@ namespace Labyrinth
 {
     internal static class ConsoleOutput
     {
-        internal static void Print(string info) 
+        internal static void Print(string info, bool moveOnNewLine) 
         {
-            Console.Write(info);
-        }
-
-        internal static void Print(string info, string newLineCharacter)
-        {           
-            Console.Write(info + newLineCharacter);
+            if (moveOnNewLine)
+            {
+                Console.WriteLine(info);
+            }
+            else
+            {
+                Console.Write(info);
+            }            
         }
     }
 }

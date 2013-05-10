@@ -7,7 +7,7 @@ namespace Labyrinth
         public Game(Random rand, Scoreboard ladder)
         {
             LabyrinthEngine labyrinth = new LabyrinthEngine(rand);
-            Message.Welcome();
+            ConsoleOutput.Print(Message.WelcomeMsg, true);
             int movesCount = 0;
             string input = "";
 
@@ -24,8 +24,8 @@ namespace Labyrinth
                 Console.WriteLine("Congratulations! You escaped in {0} moves.",
                     movesCount); // Message.Win(movesCount); // 
                 if (ladder.PlayerQualifiesInScoreboard(movesCount))
-                {
-                    Message.EnterNameForScoreBoard();
+                {                    
+                    ConsoleOutput.Print(Message.EnterNameForScoreBoardMsg, false);
                     string name = Console.ReadLine();
                     ladder.AddPlayerInScoreboard(name, movesCount);
                 }
@@ -72,13 +72,13 @@ namespace Labyrinth
                         labyrinth.TryMove(labyrinth.CurrentCell, Direction.Right);
                     break;
                 default:
-                    Message.InvalidMove();
+                    ConsoleOutput.Print(Message.InvalidMoveMsg, true);
                     break;
             }
 
             if (moveDone == false)
             {
-                Message.InvalidMove();
+                ConsoleOutput.Print(Message.InvalidMoveMsg, true);
             }
 
             return moveDone;
@@ -107,13 +107,13 @@ namespace Labyrinth
                     ladder.PrintScoreBoard();
                     break;
                 case "exit":
-                    Message.GoodBye();
+                    ConsoleOutput.Print(Message.GoodByeMsg, true);
                     Environment.Exit(0);
                     break;
                 case "restart":
                     break;
                 default:
-                    Message.InvalidCommand();
+                    ConsoleOutput.Print(Message.InvalidCommandMsg, true);
                     break;
             }
         }

@@ -20,7 +20,7 @@ namespace Labyrinth
         {
             if (topScores.Count == 0)
             {
-                Message.ScoreboardEmpty();
+                ConsoleOutput.Print(Message.ScoreBoardEmptyMsg, true);
             }
             else
             {
