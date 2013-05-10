@@ -124,7 +124,7 @@ namespace Labyrinth
             return nextCell;
         }
 
-        private bool ExitFound(Cell cell)
+        public bool ExitFound(Cell cell)
         {
             bool exitFound = false;
             bool rowBorder = (cell.Row == LabyrinthEngine.LABYRINTH_SIZE - 1 || cell.Row == 0);

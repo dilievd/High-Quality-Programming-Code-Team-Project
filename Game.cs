@@ -11,7 +11,7 @@ namespace Labyrinth
             int movesCount = 0;
             string input = "";
 
-            while (!IsGameOver(labyrinth) && input != "restart")
+            while (!labyrinth.ExitFound(labyrinth.CurrentCell) && input != "restart")
             {
                 ConsoleIO.Print(labyrinth.ToString(), true);
                 //labyrinth.PrintLabyrinth();
@@ -35,21 +35,21 @@ namespace Labyrinth
             Console.WriteLine();
         }
 
-        private bool IsGameOver(LabyrinthEngine labyrinth)
-        {
-            bool isGameOver = false;
-            int currentRow = labyrinth.CurrentCell.Row;
-            int currentCol = labyrinth.CurrentCell.Column;
-            if (currentRow == 0 ||
-                currentCol == 0 ||
-                currentRow == LabyrinthEngine.LABYRINTH_SIZE - 1 ||
-                currentCol == LabyrinthEngine.LABYRINTH_SIZE - 1)
-            {
-                isGameOver = true;
-            }
+        //private bool IsGameOver(LabyrinthEngine labyrinth)
+        //{
+        //    bool isGameOver = false;
+        //    int currentRow = labyrinth.CurrentCell.Row;
+        //    int currentCol = labyrinth.CurrentCell.Column;
+        //    if (currentRow == 0 ||
+        //        currentCol == 0 ||
+        //        currentRow == LabyrinthEngine.LABYRINTH_SIZE - 1 ||
+        //        currentCol == LabyrinthEngine.LABYRINTH_SIZE - 1)
+        //    {
+        //        isGameOver = true;
+        //    }
 
-            return isGameOver;
-        }
+        //    return isGameOver;
+        //}
 
         private void ProccessInput(string input, LabyrinthEngine labyrinth,
             ref int movesCount, Scoreboard ladder)
