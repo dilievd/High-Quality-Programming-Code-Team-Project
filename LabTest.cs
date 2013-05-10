@@ -8,10 +8,10 @@ namespace Labyrinth
         static void Main()
         {
             Scoreboard ladder = new Scoreboard();
-            Random rand = new Random();
+          
             while (1 == 1)
             {
-                Game game = new Game(rand, ladder);
+                Game game = new Game(ladder);
             }
         }
     }

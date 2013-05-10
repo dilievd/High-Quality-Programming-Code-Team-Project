@@ -4,9 +4,9 @@ namespace Labyrinth
 {
     class Game
     {
-        public Game(Random rand, Scoreboard ladder)
+        public Game(Scoreboard ladder)
         {
-            LabyrinthEngine labyrinth = new LabyrinthEngine(rand);
+            LabyrinthEngine labyrinth = new LabyrinthEngine();
             ConsoleOutput.Print(Message.WelcomeMsg, true);
             int movesCount = 0;
             string input = "";

@@ -2,7 +2,7 @@
 
 namespace Labyrinth
 {
-    class Cell
+    public class Cell
     {
         public const char EMPTY_CELL = '-';
         public const char WALL_CELL = 'X';

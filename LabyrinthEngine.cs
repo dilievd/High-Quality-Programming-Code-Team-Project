@@ -14,23 +14,24 @@ namespace Labyrinth
 
         public Cell CurrentCell { get; private set; }
 
-        public LabyrinthEngine(Random rand)
+        public LabyrinthEngine()
         {
-            GenerateLabyrinth(rand);
+            GenerateLabyrinth();
             CurrentCell = labyrinth[this.startRow, this.startColumn];
         }
 
-        private void GenerateLabyrinth(Random rand)
+        private void GenerateLabyrinth()
         {
-            CreateLabyrinth(rand);
+            CreateLabyrinth();
             if (!this.IsExitPath())
             {
-                GenerateLabyrinth(rand);
+                GenerateLabyrinth();
             }
         }
 
-        private void CreateLabyrinth(Random rand)
+        private void CreateLabyrinth()
         {
+            Random rand = new Random();
             this.labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
             for (int row = 0; row < LABYRINTH_SIZE; row++)
             {
