@@ -15,7 +15,11 @@ namespace Labyrinth
 
         public string Name 
         {
-            get { return this.name; }
+            get
+            {
+                return this.name;
+            }
+
             private set
             {
                 if (String.IsNullOrEmpty(value))
@@ -30,7 +34,11 @@ namespace Labyrinth
 
         public int MovesCount
         {
-            get { return this.movesCount; }
+            get
+            {
+                return this.movesCount;
+            }
+
             private set
             {
                 if (value < LabyrinthEngine.LABYRINTH_SIZE / 2)
