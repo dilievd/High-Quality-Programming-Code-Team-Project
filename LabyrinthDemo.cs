@@ -8,7 +8,7 @@ namespace Labyrinth
         public static void Main()
         {
             Game game = new Game();
-            while (true)
+            while (!Game.isGameOver)
             {
                 game.Play();
             }

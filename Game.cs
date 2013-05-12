@@ -5,17 +5,14 @@ namespace Labyrinth
     public class Game
     {
         private static Scoreboard scoreboard = new Scoreboard();
-
-        public Game()
-        {
-        }
+        public static bool isGameOver = false;
 
         public void Play()
         {
             ConsoleIO.Print(Message.Welcome, true);
             LabyrinthEngine labyrinth = new LabyrinthEngine();
             int movesCount = 0;
-            string input = "";
+            string input = string.Empty;
 
             while (!labyrinth.ExitFound(labyrinth.CurrentCell) && input != "restart")
             {
@@ -37,7 +34,7 @@ namespace Labyrinth
                     scoreboard.AddPlayer(currentPlayer);
                 }
 
-                ConsoleIO.Print(scoreboard.ToString(), true);
+                ConsoleIO.Print(scoreboard.ToString(), false);
             }
         }
 
@@ -73,6 +70,7 @@ namespace Labyrinth
                 case "exit":
                     command = true;
                     ConsoleIO.Print(Message.GoodBye, true);
+                    isGameOver = true;
                     Environment.Exit(0);
                     break;
                 case "restart":
