@@ -2,7 +2,7 @@
 
 namespace Labyrinth
 {
-    class  Player: IComparable<Player>
+    public class  Player: IComparable<Player>
     {
         private string name;
         private int movesCount; 

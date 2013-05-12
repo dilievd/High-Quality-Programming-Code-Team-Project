@@ -7,10 +7,13 @@ namespace Labyrinth
     {
         public static void Main()
         {
-            Game game = new Game();
-            while (!Game.isGameOver)
+            Scoreboard scoreboard = new Scoreboard();
+            bool startNewGame = true;
+            while (startNewGame)
             {
+                Game game = new Game(scoreboard);
                 game.Play();
+
             }
         }
     }

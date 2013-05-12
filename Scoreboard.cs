@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Labyrinth
 {
-    class Scoreboard
+    public class Scoreboard
     {
         private const int NUMBER_TOP_RESULTS = 5;
         private List<Player> topPlayers;

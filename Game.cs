@@ -4,27 +4,34 @@ namespace Labyrinth
 {
     public class Game
     {
-        private static Scoreboard scoreboard = new Scoreboard();
-        public static bool isGameOver = false;
+        private Scoreboard scoreboard;
+        LabyrinthEngine labyrinth;
+        public bool isGameOver;
+        int movesCount;
+
+        public Game(Scoreboard scoreboard)
+        {
+            this.isGameOver = false;
+            this.movesCount = 0;
+            this.labyrinth = new LabyrinthEngine();
+            this.scoreboard = scoreboard;
+        }
 
         public void Play()
         {
             ConsoleIO.Print(Message.Welcome, true);
-            LabyrinthEngine labyrinth = new LabyrinthEngine();
-            int movesCount = 0;
             string input = string.Empty;
 
-            while (!labyrinth.ExitFound(labyrinth.CurrentCell) && input != "RESTART")
+            while (!this.labyrinth.ExitFound(this.labyrinth.CurrentCell) && input != "RESTART")
             {
-                ConsoleIO.Print(labyrinth.ToString(), false);
-                //labyrinth.PrintLabyrinth();
+                ConsoleIO.Print(this.labyrinth.ToString(), false);
                 input = ConsoleIO.GetInput().ToUpper();
-                ProccessInput(input, labyrinth, ref movesCount, scoreboard);
+                this.ProcessInput(input);
             }
 
             if (input != "RESTART")
             {
-                ConsoleIO.Print(Message.Win, false, movesCount.ToString());
+                ConsoleIO.Print(Message.Win, false, this.movesCount.ToString());
 
                 if (scoreboard.IsTopResult(movesCount))
                 {
@@ -38,58 +45,73 @@ namespace Labyrinth
             }
         }
 
-        private void ProccessInput(string input, LabyrinthEngine labyrinth,
-            ref int movesCount, Scoreboard scoreboard)
+        private void ProcessInput(string input)
         {
-            string inputToLower = input.ToUpper();
+            string inputToUpper = input.ToUpper();
+            bool invalidMove = ProcessMove(inputToUpper);
+            ProcessCommand(input, invalidMove);
+        }
+
+        private bool ProcessMove(string input)
+        {
             bool moveDone = false;
-            bool command = false;
-            var invalidCommand = false;
-            switch (inputToLower)
+            bool validCommand = false;
+            if (input == "U")
             {
-                case "U":
-                    moveDone =
-                        labyrinth.TryMove(labyrinth.CurrentCell, Direction.Up);
-                    break;
-                case "D":
-                    moveDone =
-                        labyrinth.TryMove(labyrinth.CurrentCell, Direction.Down);
-                    break;
-                case "L":
-                    moveDone =
-                        labyrinth.TryMove(labyrinth.CurrentCell, Direction.Left);
-                    break;
-                case "R":
-                    moveDone =
-                        labyrinth.TryMove(labyrinth.CurrentCell, Direction.Right);
-                    break;
-                case "TOP":
-                    command = true;
-                    ConsoleIO.Print(scoreboard.ToString(), true);
-                    break;
-                case "EXIT":
-                    command = true;
-                    ConsoleIO.Print(Message.GoodBye, true);
-                    isGameOver = true;
-                    Environment.Exit(0);
-                    break;
-                case "RESTART":
-                    command = true;
-                    break;
-                default:
-                    invalidCommand = true;
-                    ConsoleIO.Print(Message.InvalidCommand, true);
-                    break;
+                moveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Up);
+                validCommand = true;
+            }
+            else if (input == "D")
+            {
+                moveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Down);
+                validCommand = true;
+            }
+            else if (input == "L")
+            {
+                moveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Left);
+                validCommand = true;
+            }
+            else if (input == "R")
+            {
+                moveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Right);
+                validCommand = true;
             }
 
             if (moveDone)
             {
-                movesCount++;
+                this.movesCount++;
             }
 
-            if (!moveDone && !command && !invalidCommand)
+            if (!moveDone && validCommand)
             {
                 ConsoleIO.Print(Message.InvalidMove, true);
+            }
+
+            return !moveDone && validCommand;
+        }
+
+        private void ProcessCommand(string input, bool invalidMove)
+        {
+            bool commandDone = false;
+            if (input == "TOP")
+            {
+                commandDone = true;
+                ConsoleIO.Print(this.scoreboard.ToString(), true);
+            }
+            else if (input == "EXIT")
+            {
+                commandDone = true;
+                ConsoleIO.Print(Message.GoodBye, true);
+                this.isGameOver = true;
+            }
+            else if (input == "RESTART")
+            {
+                commandDone = true;
+            }
+
+            if (!invalidMove && !commandDone)
+            {
+                ConsoleIO.Print(Message.InvalidCommand, true);
             }
         }
     }
