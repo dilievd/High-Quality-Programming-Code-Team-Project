@@ -9,12 +9,15 @@ namespace Labyrinth
         public const int LABYRINTH_SIZE = 7;
         private readonly int startRow = LABYRINTH_SIZE / 2;
         private readonly int startColumn = LABYRINTH_SIZE / 2;
+        private const char EMPTY_CELL = '-';
+        private const char WALL_CELL = 'X';
+        private const char PLAYER = '*';
+        private const char VISITED = 'v';
 
         Random rand = new Random();
 
         private Cell[,] labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
         private Cell[,] dummyLabyrint = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
-        char visited = 'v';
         private bool exitFound = false;
 
         public Cell CurrentCell { get; private set; }
@@ -40,13 +43,21 @@ namespace Labyrinth
                 for (int column = 0; column < LABYRINTH_SIZE; column++)
                 {
                     int randomValue = rand.Next(0, 2);
-                    this.labyrinth[row, column] = new Cell(row, column, randomValue);
-                    this.dummyLabyrint[row, column] = new Cell(row, column, randomValue);
+                    if (randomValue == 0)
+                    {
+                        this.labyrinth[row, column] = new Cell(row, column, EMPTY_CELL);
+                        this.dummyLabyrint[row, column] = new Cell(row, column, EMPTY_CELL);
+                    }
+                    else
+                    {
+                        this.labyrinth[row, column] = new Cell(row, column, WALL_CELL);
+                        this.dummyLabyrint[row, column] = new Cell(row, column, WALL_CELL);
+                    }
                 }
             }
 
-            this.labyrinth[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn);
-            this.dummyLabyrint[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn);
+            this.labyrinth[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn, PLAYER);
+            this.dummyLabyrint[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn, PLAYER);
 
             HasExit(this.startRow, startColumn);
         }        
@@ -55,13 +66,13 @@ namespace Labyrinth
         {
             Cell nextCell = GoToNextCell(cell, direction);
             bool moveDone = false;
-            bool isEmpty = labyrinth[nextCell.Row, nextCell.Column].IsEmpty();
+            bool isEmpty = labyrinth[nextCell.Row, nextCell.Column].Symbol == EMPTY_CELL;
             if (isEmpty)
             {
                 moveDone = true;
                 this.CurrentCell = nextCell;
                 this.labyrinth[nextCell.Row, nextCell.Column] = this.CurrentCell;
-                this.labyrinth[cell.Row, cell.Column] = new Cell(cell.Row, cell.Column, 0);
+                this.labyrinth[cell.Row, cell.Column] = new Cell(cell.Row, cell.Column, EMPTY_CELL);
             }
 
             return moveDone;
@@ -77,10 +88,10 @@ namespace Labyrinth
         private void HasExit(int row, int col)
         {
             char currentSymbol = dummyLabyrint[row, col].Symbol;
-            dummyLabyrint[row, col] = new Cell(row, col, visited);
+            dummyLabyrint[row, col] = new Cell(row, col, VISITED);
 
-            if (currentSymbol == Cell.EMPTY_CELL ||
-                currentSymbol == Cell.PLAYER)
+            if (currentSymbol == EMPTY_CELL ||
+                currentSymbol == PLAYER)
             {
 
                 if (IsAtLabSide(row, col))

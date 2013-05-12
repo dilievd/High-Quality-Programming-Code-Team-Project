@@ -4,38 +4,15 @@ namespace Labyrinth
 {
     public class Cell
     {
-        public const char EMPTY_CELL = '-';
-        public const char WALL_CELL = 'X';
-        public const char PLAYER = '*';
-
         private int row;
         private int column;
         private char symbol;
 
-        public Cell(int row, int column)
+        public Cell(int row, int column, char symbol)
         {
             this.Row = row;
             this.Column = column;
-            this.symbol = Cell.PLAYER;
-        }
-
-        public Cell(int row, int column, char symbol)
-            : this(row, column)
-        {
-            this.symbol = symbol;
-        }
-
-        public Cell(int row, int column, int randomValue)
-            : this(row, column)
-        {
-            if (randomValue == 0)
-            {
-                this.symbol = Cell.EMPTY_CELL;
-            }
-            else
-            {
-                this.symbol = Cell.WALL_CELL;
-            }
+            this.Symbol = symbol;
         }
 
         public int Row
@@ -47,9 +24,10 @@ namespace Labyrinth
 
             set
             {
-                if (value < 0 || LabyrinthEngine.LABYRINTH_SIZE <= value)
+                if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(string.Format("Row number must be in range [0..{0}]", LabyrinthEngine.LABYRINTH_SIZE - 1));
+                    throw new ArgumentOutOfRangeException(
+                        "Invalid input! Row must be non-negative number");
                 }
 
                 this.row = value;
@@ -65,10 +43,10 @@ namespace Labyrinth
 
             set
             {
-                if (value < 0 || LabyrinthEngine.LABYRINTH_SIZE <= value)
+                if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(string.Format(
-                        "Column number must be in range [0..{0}]", LabyrinthEngine.LABYRINTH_SIZE - 1));
+                    throw new ArgumentOutOfRangeException(
+                        "Invalid input! Column must be non-negative number");
                 }
 
                 this.column = value;
@@ -84,24 +62,14 @@ namespace Labyrinth
 
             private set
             {
-                if (!(value == EMPTY_CELL || value == WALL_CELL || value == PLAYER))
+                if (char.IsWhiteSpace(value))
                 {
-                    throw new ArgumentException(string.Format(
-                        "Symbol could not be {0}, it must be {1} or {2} or {3}, ", value, EMPTY_CELL, WALL_CELL, PLAYER));
+                    throw new ArgumentException(
+                        "Symbol could not be white space");
                 }
 
                 this.symbol = value;
             }
-        }
-
-        public bool IsEmpty()
-        {
-            if (this.Symbol == EMPTY_CELL)
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }
