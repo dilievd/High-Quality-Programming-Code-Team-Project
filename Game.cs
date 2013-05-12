@@ -41,39 +41,39 @@ namespace Labyrinth
         private void ProccessInput(string input, LabyrinthEngine labyrinth,
             ref int movesCount, Scoreboard scoreboard)
         {
-            string inputToLower = input.ToLower();
+            string inputToLower = input.ToUpper();
             bool moveDone = false;
             bool command = false;
             var invalidCommand = false;
             switch (inputToLower)
             {
-                case "u":
+                case "U":
                     moveDone =
                         labyrinth.TryMove(labyrinth.CurrentCell, Direction.Up);
                     break;
-                case "d":
+                case "D":
                     moveDone =
                         labyrinth.TryMove(labyrinth.CurrentCell, Direction.Down);
                     break;
-                case "l":
+                case "L":
                     moveDone =
                         labyrinth.TryMove(labyrinth.CurrentCell, Direction.Left);
                     break;
-                case "r":
+                case "R":
                     moveDone =
                         labyrinth.TryMove(labyrinth.CurrentCell, Direction.Right);
                     break;
-                case "top":
+                case "TOP":
                     command = true;
                     ConsoleIO.Print(scoreboard.ToString(), true);
                     break;
-                case "exit":
+                case "EXIT":
                     command = true;
                     ConsoleIO.Print(Message.GoodBye, true);
                     isGameOver = true;
                     Environment.Exit(0);
                     break;
-                case "restart":
+                case "RESTART":
                     command = true;
                     break;
                 default:
