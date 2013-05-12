@@ -9,6 +9,7 @@ namespace Labyrinth
     {
         internal static void Print(string info, bool moveOnNewLine, params string[] holder) 
         {
+            Console.WriteLine();
             string message = string.Format(info, holder);
             if (moveOnNewLine)
             {

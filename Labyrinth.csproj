@@ -55,7 +55,7 @@
     <Compile Include="ConsoleIO.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="LabTest.cs" />
+    <Compile Include="LabyrinthDemo.cs" />
     <Compile Include="LabyrinthEngine.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="Message.cs" />

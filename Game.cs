@@ -2,42 +2,52 @@
 
 namespace Labyrinth
 {
-    class Game
+    public class Game
     {
-        public Game(Scoreboard ladder)
+        private static Scoreboard scoreboard = new Scoreboard();
+
+        public Game()
         {
-            LabyrinthEngine labyrinth = new LabyrinthEngine();
+        }
+
+        public void Play()
+        {
             ConsoleIO.Print(Message.Welcome, true);
+            LabyrinthEngine labyrinth = new LabyrinthEngine();
             int movesCount = 0;
             string input = "";
 
             while (!labyrinth.ExitFound(labyrinth.CurrentCell) && input != "restart")
             {
-                ConsoleIO.Print(labyrinth.ToString(), true);
+                ConsoleIO.Print(labyrinth.ToString(), false);
                 //labyrinth.PrintLabyrinth();
                 input = ConsoleIO.GetInput();
-                ProccessInput(input, labyrinth, ref movesCount, ladder);
+                ProccessInput(input, labyrinth, ref movesCount, scoreboard);
             }
 
             if (input != "restart")
             {
-                ConsoleIO.Print(Message.Win, true, movesCount.ToString()); 
-                if (ladder.IsTopResult(movesCount))
+                ConsoleIO.Print(Message.Win, false, movesCount.ToString());
+
+                if (scoreboard.IsTopResult(movesCount))
                 {
                     ConsoleIO.Print(Message.EnterNameForScoreBoard, false);
                     string name = Console.ReadLine();
                     Player currentPlayer = new Player(name, movesCount);
-                    ladder.AddPlayer(currentPlayer);
+                    scoreboard.AddPlayer(currentPlayer);
                 }
+
+                ConsoleIO.Print(scoreboard.ToString(), true);
             }
         }
 
         private void ProccessInput(string input, LabyrinthEngine labyrinth,
-            ref int movesCount, Scoreboard ladder)
+            ref int movesCount, Scoreboard scoreboard)
         {
             string inputToLower = input.ToLower();
             bool moveDone = false;
             bool command = false;
+            var invalidCommand = false;
             switch (inputToLower)
             {
                 case "u":
@@ -58,7 +68,7 @@ namespace Labyrinth
                     break;
                 case "top":
                     command = true;
-                    ConsoleIO.Print(ladder.ToString(), true);
+                    ConsoleIO.Print(scoreboard.ToString(), true);
                     break;
                 case "exit":
                     command = true;
@@ -69,6 +79,7 @@ namespace Labyrinth
                     command = true;
                     break;
                 default:
+                    invalidCommand = true;
                     ConsoleIO.Print(Message.InvalidCommand, true);
                     break;
             }
@@ -78,7 +89,7 @@ namespace Labyrinth
                 movesCount++;
             }
 
-            if (!moveDone && !command)
+            if (!moveDone && !command && !invalidCommand)
             {
                 ConsoleIO.Print(Message.InvalidMove, true);
             }

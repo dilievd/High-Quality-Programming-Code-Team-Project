@@ -53,6 +53,7 @@ namespace Labyrinth
             }
             else
             {
+                resultList.AppendLine("Scoreboard:");
                 for (int index = 0; index < this.topPlayers.Count; index++)
                 {
                     string currentResult = string.Format("{0}. {1} --> {2} moves",
