@@ -103,24 +103,8 @@ namespace Labyrinth
 
         private Cell GoToNextCell(Cell cell, Direction direction)
         {
-            Cell nextCell = new Cell(cell.Row, cell.Column, cell.Symbol);
-            if (direction == Direction.Up)
-            {
-                nextCell.Row--;
-            }
-            else if (direction == Direction.Down)
-            {
-                nextCell.Row++;
-            }
-            else if (direction == Direction.Left)
-            {
-                nextCell.Column--;
-            }
-            else if (direction == Direction.Right)
-            {
-                nextCell.Column++;
-            }
-
+            Cell nextCell = new Cell(cell.Row + direction.X, cell.Column+direction.Y, cell.Symbol);
+          
             return nextCell;
         }
 

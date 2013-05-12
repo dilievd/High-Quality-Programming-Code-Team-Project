@@ -58,7 +58,7 @@ namespace Labyrinth
                 {
                     string currentResult = string.Format("{0}. {1} --> {2} moves",
                         index + 1, topPlayers[index].Name, topPlayers[index].MovesCount);
-                    resultList.Append(currentResult);
+                    resultList.AppendLine(currentResult);
                 }
             }
 
