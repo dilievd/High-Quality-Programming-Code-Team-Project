@@ -60,7 +60,7 @@ namespace Labyrinth
                 return this.symbol;
             }
 
-            private set
+            set
             {
                 if (char.IsWhiteSpace(value))
                 {
