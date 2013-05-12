@@ -14,15 +14,15 @@ namespace Labyrinth
             int movesCount = 0;
             string input = string.Empty;
 
-            while (!labyrinth.ExitFound(labyrinth.CurrentCell) && input != "restart")
+            while (!labyrinth.ExitFound(labyrinth.CurrentCell) && input != "RESTART")
             {
                 ConsoleIO.Print(labyrinth.ToString(), false);
                 //labyrinth.PrintLabyrinth();
-                input = ConsoleIO.GetInput();
+                input = ConsoleIO.GetInput().ToUpper();
                 ProccessInput(input, labyrinth, ref movesCount, scoreboard);
             }
 
-            if (input != "restart")
+            if (input != "RESTART")
             {
                 ConsoleIO.Print(Message.Win, false, movesCount.ToString());
 
