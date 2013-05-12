@@ -10,7 +10,12 @@ namespace Labyrinth
         private readonly int startRow = LABYRINTH_SIZE / 2;
         private readonly int startColumn = LABYRINTH_SIZE / 2;
 
-        private Cell[,] labyrinth;
+        Random rand = new Random();
+
+        private Cell[,] labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
+        private Cell[,] dummyLabyrint = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
+        char visited = 'v';
+        private bool exitFound = false;
 
         public Cell CurrentCell { get; private set; }
 
@@ -25,65 +30,26 @@ namespace Labyrinth
             do
             {
                 CreateLabyrinth();
-            } while (!this.HasExit());
+            } while (!exitFound);
         }
 
         private void CreateLabyrinth()
         {
-            Random rand = new Random();
-            this.labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
             for (int row = 0; row < LABYRINTH_SIZE; row++)
             {
                 for (int column = 0; column < LABYRINTH_SIZE; column++)
                 {
                     int randomValue = rand.Next(0, 2);
                     this.labyrinth[row, column] = new Cell(row, column, randomValue);
+                    this.dummyLabyrint[row, column] = new Cell(row, column, randomValue);
                 }
             }
 
             this.labyrinth[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn);
-        }
+            this.dummyLabyrint[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn);
 
-        private bool HasExit()
-        {
-            Queue<Cell> cellsOrder = new Queue<Cell>();
-            Cell startCell = labyrinth[this.startRow, this.startColumn];
-            cellsOrder.Enqueue(startCell);
-            HashSet<Cell> visitedCells = new HashSet<Cell>();
-            bool isExitPath = false;
-            while (cellsOrder.Count > 0)
-            {
-                Cell currentCell = cellsOrder.Dequeue();
-                visitedCells.Add(currentCell);
-                if (ExitFound(currentCell))
-                {
-                    isExitPath = true;
-                    break;
-                }
-
-                AddNeighbor(currentCell, Direction.Down, cellsOrder, visitedCells);
-                AddNeighbor(currentCell, Direction.Up, cellsOrder, visitedCells);
-                AddNeighbor(currentCell, Direction.Left, cellsOrder, visitedCells);
-                AddNeighbor(currentCell, Direction.Right, cellsOrder, visitedCells);
-            }
-
-            return isExitPath;
-        }
-
-        private void AddNeighbor(Cell cell, Direction direction,
-            Queue<Cell> cellsOrder, HashSet<Cell> visitedCells)
-        {
-            Cell nextCell = GoToNextCell(cell, direction);
-            bool isInnerCell = nextCell.Row >= 0 || nextCell.Row < labyrinth.GetLength(0) || 
-                nextCell.Column >= 0 || nextCell.Column < labyrinth.GetLength(1);
-            bool isVisited = visitedCells.Contains(labyrinth[nextCell.Row, nextCell.Column]);
-            bool isEmpty = labyrinth[nextCell.Row, nextCell.Column].IsEmpty();
-
-            if (isInnerCell && !isVisited && isEmpty)
-            {
-                cellsOrder.Enqueue(labyrinth[nextCell.Row, nextCell.Column]);
-            }
-        }
+            HasExit(this.startRow, startColumn);
+        }        
 
         public bool TryMove(Cell cell, Direction direction)
         {
@@ -106,6 +72,44 @@ namespace Labyrinth
             Cell nextCell = new Cell(cell.Row + direction.X, cell.Column+direction.Y, cell.Symbol);
           
             return nextCell;
+        }
+
+        private void HasExit(int row, int col)
+        {
+            char currentSymbol = dummyLabyrint[row, col].Symbol;
+            dummyLabyrint[row, col] = new Cell(row, col, visited);
+
+            if (currentSymbol == Cell.EMPTY_CELL ||
+                currentSymbol == Cell.PLAYER)
+            {
+
+                if (IsAtLabSide(row, col))
+                {
+                    exitFound = true;
+                    return;
+                }
+
+                if (!exitFound)
+                {
+                    HasExit(row, col - 1); //left
+                    HasExit(row - 1, col); // up
+                    HasExit(row, col + 1); // right                   
+                    HasExit(row + 1, col); // down
+                }
+            }
+        }
+
+        private bool IsAtLabSide(int row, int col)
+        {
+            if (row == 0 ||
+                col == 0 ||
+                row == LabyrinthEngine.LABYRINTH_SIZE - 1 ||
+                col == LabyrinthEngine.LABYRINTH_SIZE - 1)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public bool ExitFound(Cell cell)
