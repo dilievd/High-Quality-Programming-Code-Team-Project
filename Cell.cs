@@ -2,6 +2,9 @@
 
 namespace Labyrinth
 {
+    /// <summary>
+    /// Represent cell from the labyrinth
+    /// </summary>
     public class Cell
     {
         private int row;
@@ -15,6 +18,9 @@ namespace Labyrinth
             this.Symbol = symbol;
         }
 
+        /// <summary>
+        /// Represent cell's row in the labyrinth
+        /// </summary>
         public int Row
         {
             get
@@ -34,6 +40,9 @@ namespace Labyrinth
             }
         }
 
+        /// <summary>
+        /// Represent cell's column in the labyrinth
+        /// </summary>
         public int Column
         {
             get
@@ -53,6 +62,9 @@ namespace Labyrinth
             }
         }
 
+        /// <summary>
+        /// Represent cell's symbol in the labyrinth
+        /// </summary>
         public char Symbol
         {
             get
@@ -65,7 +77,7 @@ namespace Labyrinth
                 if (char.IsWhiteSpace(value))
                 {
                     throw new ArgumentException(
-                        "Symbol could not be white space");
+                        "Invalid input! Symbol cannot be white space");
                 }
 
                 this.symbol = value;

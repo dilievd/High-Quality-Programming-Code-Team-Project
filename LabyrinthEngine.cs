@@ -4,12 +4,18 @@ using System.Text;
 
 namespace Labyrinth
 {
+    /// <summary>
+    /// Represent the labyrinth engine for the game
+    /// </summary>
     public class LabyrinthEngine
     {
         private const char EMPTY_CELL = '-';
         private const char WALL_CELL = 'X';
         private const char PLAYER = '*';
         private const char VISITED = 'v';
+        /// <summary>
+        /// Represent number of rows and columns of the labyrinth
+        /// </summary>
         public const int LABYRINTH_SIZE = 7;
         private readonly int startRow = LABYRINTH_SIZE / 2;
         private readonly int startColumn = LABYRINTH_SIZE / 2;
@@ -19,6 +25,9 @@ namespace Labyrinth
         private Random rand = new Random();
         private bool exitFound = false;
 
+        /// <summary>
+        /// Represent the the cell in the labyrinth, where is the player
+        /// </summary>
         public Cell CurrentCell { get; private set; }
 
         public LabyrinthEngine()
@@ -27,6 +36,9 @@ namespace Labyrinth
             this.GenerateLabyrinth();
         }
 
+        /// <summary>
+        /// Generate new labyrinth till there is no way to escape from the labyrinth
+        /// </summary>
         private void GenerateLabyrinth()
         {
             do
@@ -36,6 +48,9 @@ namespace Labyrinth
             } while (!this.exitFound);
         }
 
+        /// <summary>
+        /// Create labyrinth by initializing its cells
+        /// </summary>
         private void CreateLabyrinth()
         {
             for (int row = 0; row < LABYRINTH_SIZE; row++)
@@ -60,6 +75,10 @@ namespace Labyrinth
             this.dummyLabyrinth[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn, PLAYER);
         }
 
+        /// <summary>
+        /// Check is there a way to escape from the labyrinth
+        /// </summary>
+        /// <param name="cell">Cell from which strart the way</param>
         private void HasExit(Cell cell)
         {
             char currentSymbol = cell.Symbol;
@@ -74,14 +93,20 @@ namespace Labyrinth
 
                 if (!this.exitFound)
                 {
-                    this.HasExit(this.dummyLabyrinth[cell.Row, cell.Column - 1]); //left
-                    this.HasExit(this.dummyLabyrinth[cell.Row, cell.Column + 1]); // up
-                    this.HasExit(this.dummyLabyrinth[cell.Row - 1, cell.Column]); // right                   
-                    this.HasExit(this.dummyLabyrinth[cell.Row + 1, cell.Column]); // down
+                    this.HasExit(this.dummyLabyrinth[cell.Row, cell.Column - 1]);
+                    this.HasExit(this.dummyLabyrinth[cell.Row, cell.Column + 1]);
+                    this.HasExit(this.dummyLabyrinth[cell.Row - 1, cell.Column]);                
+                    this.HasExit(this.dummyLabyrinth[cell.Row + 1, cell.Column]);
                 }
             }
         }
 
+        /// <summary>
+        /// Check if given move is possible
+        /// </summary>
+        /// <param name="cell">Cell from which start the move</param>
+        /// <param name="direction">Direction of the move</param>
+        /// <returns>Is or is not done the move</returns>
         public bool TryMove(Cell cell, Direction direction)
         {
             Cell nextCell = new Cell(cell.Row + direction.X, cell.Column + direction.Y, cell.Symbol);
@@ -98,6 +123,11 @@ namespace Labyrinth
             return moveDone;
         }
 
+        /// <summary>
+        /// Check is the player escaped from the labyrinth
+        /// </summary>
+        /// <param name="cell">Cell where is the player</param>
+        /// <returns>Is the player or is not escaped from the labyrinth</returns>
         public bool ExitFound(Cell cell)
         {
             bool exitFound = false;
@@ -111,6 +141,10 @@ namespace Labyrinth
             return exitFound;
         }
 
+        /// <summary>
+        /// Create string representation of the labyrinth
+        /// </summary>
+        /// <returns>String representation of the labyrinth</returns>
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();

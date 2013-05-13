@@ -5,111 +5,141 @@ namespace Labyrinth
     public class Game
     {
         private Scoreboard scoreboard;
-        LabyrinthEngine labyrinth;
-        public bool isGameOver;
-        int movesCount;
+        private LabyrinthEngine labyrinth;
+        private int movesCount;
 
         public Game(Scoreboard scoreboard)
         {
-            this.isGameOver = false;
+            if (scoreboard == null)
+            {
+                throw new ArgumentNullException(
+                    "Invalid input! Scoreboard cannot be null.");
+            }
+
+            this.IsExit = false;
+            this.IsRestart = false;
             this.movesCount = 0;
             this.labyrinth = new LabyrinthEngine();
             this.scoreboard = scoreboard;
         }
 
+        /// <summary>
+        /// Show is or is not entered EXIT command
+        /// </summary>
+        public bool IsExit { get; private set; }
+
+        private bool IsRestart { get; set; }
+
+        /// <summary>
+        /// Run the game
+        /// </summary>
         public void Play()
         {
             ConsoleIO.Print(Message.Welcome, true);
             string input = string.Empty;
 
-            while (!this.labyrinth.ExitFound(this.labyrinth.CurrentCell) && input != "RESTART")
+            while (!this.labyrinth.ExitFound(this.labyrinth.CurrentCell) && !this.IsRestart && !this.IsExit)
             {
                 ConsoleIO.Print(this.labyrinth.ToString(), false);
-                input = ConsoleIO.GetInput().ToUpper();
+                input = ConsoleIO.GetInput(Message.EnterMove).ToUpper();
                 this.ProcessInput(input);
             }
 
-            if (input != "RESTART")
+            if (!this.IsRestart && !this.IsExit)
             {
                 ConsoleIO.Print(Message.Win, false, this.movesCount.ToString());
 
-                if (scoreboard.IsTopResult(movesCount))
+                if (this.scoreboard.IsTopResult(this.movesCount))
                 {
-                    ConsoleIO.Print(Message.EnterNameForScoreBoard, false);
-                    string name = Console.ReadLine();
-                    Player currentPlayer = new Player(name, movesCount);
-                    scoreboard.AddPlayer(currentPlayer);
+                    string name = ConsoleIO.GetInput(Message.EnterNameForScoreBoard);
+                    Player currentPlayer = new Player(name, this.movesCount);
+                    this.scoreboard.AddPlayer(currentPlayer);
                 }
 
-                ConsoleIO.Print(scoreboard.ToString(), false);
+                ConsoleIO.Print(this.scoreboard.ToString(), false);
             }
         }
 
+        /// <summary>
+        /// Execute the entered input from the console
+        /// </summary>
+        /// <param name="input">Entered input</param>
         private void ProcessInput(string input)
         {
             string inputToUpper = input.ToUpper();
-            bool invalidMove = ProcessMove(inputToUpper);
-            ProcessCommand(input, invalidMove);
+            bool isMoveCommand = ProcessMove(inputToUpper);
+            ProcessCommand(input, isMoveCommand);
         }
 
+        /// <summary>
+        /// Execute the input if it is a command for move
+        /// </summary>
+        /// <param name="input">Command</param>
+        /// <returns>Is or is not a command for move</returns>
         private bool ProcessMove(string input)
         {
-            bool moveDone = false;
-            bool validCommand = false;
+            bool isMoveDone = false;
+            bool isMoveCommand = false;
             if (input == "U")
             {
-                moveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Up);
-                validCommand = true;
+                isMoveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Up);
+                isMoveCommand = true;
             }
             else if (input == "D")
             {
-                moveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Down);
-                validCommand = true;
+                isMoveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Down);
+                isMoveCommand = true;
             }
             else if (input == "L")
             {
-                moveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Left);
-                validCommand = true;
+                isMoveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Left);
+                isMoveCommand = true;
             }
             else if (input == "R")
             {
-                moveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Right);
-                validCommand = true;
+                isMoveDone = this.labyrinth.TryMove(this.labyrinth.CurrentCell, Direction.Right);
+                isMoveCommand = true;
             }
 
-            if (moveDone)
+            if (isMoveDone)
             {
                 this.movesCount++;
             }
 
-            if (!moveDone && validCommand)
+            if (!isMoveDone && isMoveCommand)
             {
                 ConsoleIO.Print(Message.InvalidMove, true);
             }
 
-            return !moveDone && validCommand;
+            return isMoveCommand;
         }
 
-        private void ProcessCommand(string input, bool invalidMove)
+        /// <summary>
+        /// Execute the input if it is a service command
+        /// </summary>
+        /// <param name="input">Command</param>
+        /// <param name="isMoveCommand">Is the command command for move</param>
+        private void ProcessCommand(string input, bool isMoveCommand)
         {
-            bool commandDone = false;
+            bool isCommandDone = false;
             if (input == "TOP")
             {
-                commandDone = true;
+                isCommandDone = true;
                 ConsoleIO.Print(this.scoreboard.ToString(), true);
             }
             else if (input == "EXIT")
             {
-                commandDone = true;
+                isCommandDone = true;
                 ConsoleIO.Print(Message.GoodBye, true);
-                this.isGameOver = true;
+                this.IsExit = true;
             }
             else if (input == "RESTART")
             {
-                commandDone = true;
+                this.IsRestart = true;
+                isCommandDone = true;
             }
 
-            if (!invalidMove && !commandDone)
+            if (!isMoveCommand && !isCommandDone)
             {
                 ConsoleIO.Print(Message.InvalidCommand, true);
             }

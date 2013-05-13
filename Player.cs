@@ -2,6 +2,9 @@
 
 namespace Labyrinth
 {
+    /// <summary>
+    /// Represent a player in the game
+    /// </summary>
     public class  Player: IComparable<Player>
     {
         private string name;
@@ -13,6 +16,9 @@ namespace Labyrinth
             this.MovesCount = movesCount;
         }
 
+        /// <summary>
+        /// Represent the name of the plyer
+        /// </summary>
         public string Name 
         {
             get
@@ -32,6 +38,9 @@ namespace Labyrinth
             }
         }
 
+        /// <summary>
+        /// Represent the result of the player (number of moves to escape from the labyrinth)
+        /// </summary>
         public int MovesCount
         {
             get
@@ -43,7 +52,7 @@ namespace Labyrinth
             {
                 if (value < LabyrinthEngine.LABYRINTH_SIZE / 2)
                 {
-                    throw new ArgumentOutOfRangeException("Can't escape from labyrinth in " + 
+                    throw new ArgumentOutOfRangeException("Cannot escape from labyrinth in " + 
                         "less moves than the shortest distance from center of the labyrinth!");
                 }
 
@@ -51,6 +60,11 @@ namespace Labyrinth
             }
         }
 
+        /// <summary>
+        /// Compare two players by their result - MovesCount
+        /// </summary>
+        /// <param name="other">Player compared to the current one</param>
+        /// <returns>1, 0 or -1 according to MovesCount property value of both players</returns>
         public int CompareTo(Player other)
         {
             int comparePlayer = this.MovesCount.CompareTo(other.MovesCount);

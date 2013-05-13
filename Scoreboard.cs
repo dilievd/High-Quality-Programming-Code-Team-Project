@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Labyrinth
 {
+    /// <summary>
+    /// Represent the list of players with top results 
+    /// </summary>
     public class Scoreboard
     {
         private const int NUMBER_TOP_RESULTS = 5;
@@ -15,6 +18,10 @@ namespace Labyrinth
             topPlayers = new List<Player>(NUMBER_TOP_RESULTS);
         }
 
+        /// <summary>
+        /// Add player to the scoreboard
+        /// </summary>
+        /// <param name="player">Changed scoreboard</param>
         public void AddPlayer(Player player)
         {
             if (this.topPlayers.Count == NUMBER_TOP_RESULTS)
@@ -29,6 +36,11 @@ namespace Labyrinth
             this.topPlayers.Sort();
         }
 
+        /// <summary>
+        /// Find is the current result top result
+        /// </summary>
+        /// <param name="result">Current result</param>
+        /// <returns>Is or is not current result top result</returns>
         public bool IsTopResult(int result)
         {
             bool isTopResult = false;
@@ -44,6 +56,10 @@ namespace Labyrinth
             return isTopResult;
         }
 
+        /// <summary>
+        /// Create string representation of the scoreboard
+        /// </summary>
+        /// <returns>String representation of the scoreboard</returns>
         public override string ToString()
         {
             StringBuilder resultList = new StringBuilder();
