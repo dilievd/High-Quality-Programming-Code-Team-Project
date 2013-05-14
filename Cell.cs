@@ -28,12 +28,17 @@ namespace Labyrinth
                 return this.row;
             }
 
-            set
+            private set
             {
                 if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException(
-                        "Invalid input! Row must be non-negative number");
+                        "Row number must be non-negative number!");
+                }
+                else if (value >= LabyrinthEngine.LABYRINTH_SIZE)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "Row number can not exceed the size of the labyrinth!");
                 }
 
                 this.row = value;
@@ -50,12 +55,17 @@ namespace Labyrinth
                 return this.column;
             }
 
-            set
+            private set
             {
                 if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException(
-                        "Invalid input! Column must be non-negative number");
+                        "Column number must be non-negative number!");
+                }
+                else if (value >= LabyrinthEngine.LABYRINTH_SIZE)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "Column number can not exceed the size of the labyrinth!");
                 }
 
                 this.column = value;
@@ -77,7 +87,7 @@ namespace Labyrinth
                 if (char.IsWhiteSpace(value))
                 {
                     throw new ArgumentException(
-                        "Invalid input! Symbol cannot be white space");
+                        "Symbol cannot be white space");
                 }
 
                 this.symbol = value;

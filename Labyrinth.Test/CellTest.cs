@@ -5,59 +5,102 @@ using System;
 namespace Labyrinth.Test
 {
     /// <summary>
-    ///This is a test class for CellTest and is intended
-    ///to contain all CellTest Unit Tests
-    ///</summary>
+    /// This is a test class for Cell and is intended
+    /// to contain all Cell Unit Tests
+    /// </summary>
     [TestClass()]
     public class CellTest
     {
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void CellWithNegativeRowNumber()
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            int row = -1;
+            int col = 1;
+            char symbol = '*';
+            Cell cell = new Cell(row, col, symbol);
         }
 
-        #region Additional test attributes
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-        #endregion
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void CellWithNegativeColumnNumber()
+        {
+            int row = 1;
+            int col = -1;
+            char symbol = '*';
+            Cell cell = new Cell(row, col, symbol);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void CellWithBiggerRowNumberBiggerThanSize()
+        {
+            int row = 7;
+            int col = 1;
+            char symbol = '*';
+            Cell cell = new Cell(row, col, symbol);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void CellWithColumnNumberBiggerThanSize()
+        {
+            int row = 1;
+            int col = 7;
+            char symbol = '*';
+            Cell cell = new Cell(row, col, symbol);
+        }
+
+        [TestMethod]
+        public void CellWithRowAndColumnNumberEqualToZero()
+        {
+            int row = 0;
+            int col = 0;
+            char symbol = '*';
+            Cell cell = new Cell(row, col, symbol);
+
+            int resultRow = cell.Row;
+            Assert.AreEqual(row, resultRow);
+
+            int resultCol = cell.Column;
+            Assert.AreEqual(row, resultCol);
+        }
+
+        [TestMethod]
+        public void CellWithRowAndColumnNumberEqualToSize()
+        {
+            int row = 6;
+            int col = 6;
+            char symbol = '*';
+            Cell cell = new Cell(row, col, symbol);
+
+            int resultRow = cell.Row;
+            Assert.AreEqual(row, resultRow);
+
+            int resultCol = cell.Column;
+            Assert.AreEqual(row, resultCol);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CellWithWhitespaceSymbol()
+        {
+            int row = 3;
+            int col = 3;
+            char symbol = ' ';
+            Cell cell = new Cell(row, col, symbol);
+        }
+
+        [TestMethod]
+        public void CellGetSymbol()
+        {
+            int row = 0;
+            int col = 0;
+            char symbol = '*';
+            Cell cell = new Cell(row, col, symbol);
+
+            char resultSymbol = cell.Symbol;
+            Assert.AreEqual(symbol, resultSymbol);
+        }
     }
 }
