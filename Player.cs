@@ -52,7 +52,7 @@ namespace Labyrinth
             {
                 if (value < LabyrinthEngine.LABYRINTH_SIZE / 2)
                 {
-                    throw new ArgumentOutOfRangeException("Cannot escape from labyrinth in " + 
+                    throw new ArgumentException("Can not escape from labyrinth in " + 
                         "less moves than the shortest distance from center of the labyrinth!");
                 }
 

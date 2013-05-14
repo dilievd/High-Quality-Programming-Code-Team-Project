@@ -5,59 +5,128 @@ using System;
 namespace Labyrinth.Test
 {
     /// <summary>
-    ///This is a test class for PlayerTest and is intended
-    ///to contain all PlayerTest Unit Tests
-    ///</summary>
+    /// This is a test class for Player and is intended
+    /// to contain all Player Unit Tests
+    /// </summary>
     [TestClass()]
     public class PlayerTest
     {
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PlayerWithNullName()
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            string name = null;
+            int movesCount = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player = new Player(name, movesCount);
         }
 
-        #region Additional test attributes
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-        #endregion
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PlayerWithEmptyName()
+        {
+            string name = string.Empty;
+            int movesCount = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player = new Player(name, movesCount);
+        }
 
+        [TestMethod]
+        public void PlayerWithValidName()
+        {
+            string name = "Dexter Morgan";
+            int movesCount = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player = new Player(name, movesCount);
+
+            string resultName = player.Name;
+            Assert.AreEqual(name, resultName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void PlayerWithZeroMovesCount()
+        {
+            string name = "Dexter Morgan";
+            int movesCount = 0;
+            Player player = new Player(name, movesCount);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void PlayerWithNegativeMovesCount()
+        {
+            string name = "Dexter Morgan";
+            int movesCount = -1;
+            Player player = new Player(name, movesCount);
+        }
+
+        [TestMethod]
+        public void PlayerWithValidMovesCount()
+        {
+            string name = "Dexter Morgan";
+            int movesCount = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player = new Player(name, movesCount);
+
+            int resultMovesCount = player.MovesCount;
+            Assert.AreEqual(movesCount, resultMovesCount);
+        }
+
+        [TestMethod]
+        public void CompareToPlayerWithMoreMovesCount()
+        {
+            string name1 = "Dexter Morgan";
+            int movesCount1 = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player1 = new Player(name1, movesCount1);
+
+            string name2 = "Deborah Morgan";
+            int movesCount2 = LabyrinthEngine.LABYRINTH_SIZE / 2 + 1;
+            Player player2 = new Player(name2, movesCount2);
+
+            int result = player1.CompareTo(player2);
+            Assert.AreEqual(-1, result);
+        }
+
+        [TestMethod]
+        public void CompareToPlayerWithLessMovesCount()
+        {
+            string name1 = "Dexter Morgan";
+            int movesCount1 = LabyrinthEngine.LABYRINTH_SIZE / 2 + 1;
+            Player player1 = new Player(name1, movesCount1);
+
+            string name2 = "Deborah Morgan";
+            int movesCount2 = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player2 = new Player(name2, movesCount2);
+
+            int result = player1.CompareTo(player2);
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void CompareToPlayerWithSameMovesCount()
+        {
+            string name1 = "Dexter Morgan";
+            int movesCount1 = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player1 = new Player(name1, movesCount1);
+
+            string name2 = "Deborah Morgan";
+            int movesCount2 = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player2 = new Player(name2, movesCount2);
+
+            int result = player1.CompareTo(player2);
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void CompareToPlayerWithSameNamesAndMoves()
+        {
+            string name1 = "Dexter Morgan";
+            int movesCount1 = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player1 = new Player(name1, movesCount1);
+
+            string name2 = "Dexter Morgan";
+            int movesCount2 = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            Player player2 = new Player(name2, movesCount2);
+
+            int result = player1.CompareTo(player2);
+            Assert.AreEqual(0, result);
+        }
     }
 }
