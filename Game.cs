@@ -36,27 +36,38 @@ namespace Labyrinth
         public void Play()
         {
             ConsoleIO.Print(Message.Welcome, true);
-            string input = string.Empty;
-
-            while (!this.labyrinth.ExitFound(this.labyrinth.CurrentCell) && !this.IsRestart && !this.IsExit)
-            {
-                ConsoleIO.Print(this.labyrinth.ToString(), false);
-                input = ConsoleIO.GetInput(Message.EnterMove).ToUpper();
-                this.ProcessInput(input);
-            }
+            RunGame();
 
             if (!this.IsRestart && !this.IsExit)
             {
                 ConsoleIO.Print(Message.Win, false, this.movesCount.ToString());
-
-                if (this.scoreboard.IsTopResult(this.movesCount))
-                {
-                    string name = ConsoleIO.GetInput(Message.EnterNameForScoreBoard);
-                    Player currentPlayer = new Player(name, this.movesCount);
-                    this.scoreboard.AddPlayer(currentPlayer);
-                }
-
+                AddResultToScoreBoard();
                 ConsoleIO.Print(this.scoreboard.ToString(), false);
+            }
+        }
+
+        private void AddResultToScoreBoard()
+        {
+            if (this.scoreboard.IsTopResult(this.movesCount))
+            {
+                string name = ConsoleIO.GetInput(Message.EnterNameForScoreBoard);
+                Player currentPlayer = new Player(name, this.movesCount);
+                this.scoreboard.AddPlayer(currentPlayer);
+            }
+        }
+
+        private void RunGame()
+        {
+            string input = string.Empty;
+            bool isGameOver = this.labyrinth.ExitFound(this.labyrinth.CurrentCell);
+
+            while (!isGameOver && !this.IsRestart && !this.IsExit)
+            {
+                ConsoleIO.Print(this.labyrinth.ToString(), false);
+                input = ConsoleIO.GetInput(Message.EnterMove).ToUpper();
+                this.ProcessInput(input);
+
+                isGameOver = this.labyrinth.ExitFound(this.labyrinth.CurrentCell);
             }
         }
 
@@ -120,29 +131,27 @@ namespace Labyrinth
         /// <param name="input">Command</param>
         /// <param name="isMoveCommand">Is the command command for move</param>
         private void ProcessCommand(string input, bool isMoveCommand)
-        {
-            bool isCommandDone = false;
-            if (input == "TOP")
+        {            
+            if (!isMoveCommand)
             {
-                isCommandDone = true;
-                ConsoleIO.Print(this.scoreboard.ToString(), true);
-            }
-            else if (input == "EXIT")
-            {
-                isCommandDone = true;
-                ConsoleIO.Print(Message.GoodBye, true);
-                this.IsExit = true;
-            }
-            else if (input == "RESTART")
-            {
-                this.IsRestart = true;
-                isCommandDone = true;
-            }
-
-            if (!isMoveCommand && !isCommandDone)
-            {
-                ConsoleIO.Print(Message.InvalidCommand, true);
-            }
+                if (input == "TOP")
+                {
+                    ConsoleIO.Print(this.scoreboard.ToString(), true);
+                }
+                else if (input == "EXIT")
+                {                    
+                    ConsoleIO.Print(Message.GoodBye, true);
+                    this.IsExit = true;
+                }
+                else if (input == "RESTART")
+                {
+                    this.IsRestart = true;                    
+                }
+                else
+                {
+                    ConsoleIO.Print(Message.InvalidCommand, true);
+                }
+            }         
         }
     }
 }
