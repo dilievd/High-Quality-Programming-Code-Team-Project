@@ -5,7 +5,7 @@ namespace Labyrinth
     /// <summary>
     /// Represent a player in the game
     /// </summary>
-    public class  Player: IComparable<Player>
+    public class Player: IComparable<Player>
     {
         private string name;
         private int movesCount; 
