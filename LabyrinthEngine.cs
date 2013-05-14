@@ -23,9 +23,8 @@ namespace Labyrinth
 
         private Cell[,] labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
         private Cell[,] dummyLabyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
-        private Random rand = new Random();
-        private bool exitFound = false;
-
+        private Random rand = new Random();        
+        
         /// <summary>
         /// Represent the the cell in the labyrinth, where is the player
         /// </summary>
@@ -37,16 +36,26 @@ namespace Labyrinth
             this.GenerateLabyrinth();
         }
 
+
+#if DEBUG
+        // Overloaded constructor used for testing.
+        public LabyrinthEngine(Cell[,] labyrinth) 
+        {
+            this.labyrinth = labyrinth;
+        } 
+#endif
+
         /// <summary>
         /// Generate new labyrinth till there is no way to escape from the labyrinth
         /// </summary>
         private void GenerateLabyrinth()
         {
+            bool labyrinthHasExit = false;
             do
             {
                 this.CreateLabyrinth();
-                this.HasExit(this.CurrentCell);
-            } while (!this.exitFound);
+                labyrinthHasExit = this.HasExit(this.CurrentCell);
+            } while (!labyrinthHasExit);
         }
 
         /// <summary>
@@ -80,26 +89,26 @@ namespace Labyrinth
         /// Check is there a way to escape from the labyrinth
         /// </summary>
         /// <param name="cell">Cell from which strart the way</param>
-        private void HasExit(Cell cell)
+        private bool HasExit(Cell cell)
         {
             char currentSymbol = cell.Symbol;
             this.dummyLabyrinth[cell.Row, cell.Column].Symbol = VISITED;
+            bool isExitFound = false;
+
             if (currentSymbol == EMPTY_CELL || currentSymbol == PLAYER)
             {
-                if (this.ExitFound(cell))
+                isExitFound = this.ExitFound(cell);
+                if (!isExitFound)
                 {
-                    this.exitFound = true;
-                    return;
-                }
-
-                if (!this.exitFound)
-                {
-                    this.HasExit(this.dummyLabyrinth[cell.Row, cell.Column - 1]);
-                    this.HasExit(this.dummyLabyrinth[cell.Row, cell.Column + 1]);
-                    this.HasExit(this.dummyLabyrinth[cell.Row - 1, cell.Column]);                
-                    this.HasExit(this.dummyLabyrinth[cell.Row + 1, cell.Column]);
+                    isExitFound =
+                        this.HasExit(this.dummyLabyrinth[cell.Row, cell.Column - 1]) ||
+                        this.HasExit(this.dummyLabyrinth[cell.Row, cell.Column + 1]) ||
+                        this.HasExit(this.dummyLabyrinth[cell.Row + 1, cell.Column]) ||
+                        this.HasExit(this.dummyLabyrinth[cell.Row - 1, cell.Column]);
                 }
             }
+
+            return isExitFound;
         }
 
         /// <summary>
