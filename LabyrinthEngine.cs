@@ -9,9 +9,9 @@ namespace Labyrinth
     /// </summary>
     public class LabyrinthEngine
     {
-        private const char EMPTY_CELL = '-';
-        private const char WALL_CELL = 'X';
-        private const char PLAYER = '*';
+        public const char EMPTY_CELL = '-';
+        public const char WALL_CELL = 'X';
+        public const char PLAYER = '*';
         private const char VISITED = 'v';
 
         /// <summary>
@@ -21,8 +21,8 @@ namespace Labyrinth
         private readonly int startRow = LABYRINTH_SIZE / 2;
         private readonly int startColumn = LABYRINTH_SIZE / 2;
 
-        private Cell[,] labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
-        private Cell[,] dummyLabyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
+        protected Cell[,] labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
+        protected Cell[,] dummyLabyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
         private Random rand = new Random();        
         
         /// <summary>
@@ -35,15 +35,6 @@ namespace Labyrinth
             this.CurrentCell = new Cell(this.startRow, this.startColumn, PLAYER);
             this.GenerateLabyrinth();
         }
-
-
-#if DEBUG
-        // Overloaded constructor used for testing.
-        public LabyrinthEngine(Cell[,] labyrinth) 
-        {
-            this.labyrinth = labyrinth;
-        } 
-#endif
 
         /// <summary>
         /// Generate new labyrinth till there is no way to escape from the labyrinth
@@ -61,7 +52,7 @@ namespace Labyrinth
         /// <summary>
         /// Create labyrinth by initializing its cells
         /// </summary>
-        private void CreateLabyrinth()
+        protected virtual void CreateLabyrinth()
         {
             for (int row = 0; row < LABYRINTH_SIZE; row++)
             {

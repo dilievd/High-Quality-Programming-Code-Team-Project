@@ -5,8 +5,8 @@ namespace Labyrinth
     public class Game
     {
         private Scoreboard scoreboard;
-        private LabyrinthEngine labyrinth;
-        private int movesCount;
+        private LabyrinthEngine labyrinth = new LabyrinthEngine();
+        private int movesCount = 0;
 
         public Game(Scoreboard scoreboard)
         {
@@ -18,8 +18,6 @@ namespace Labyrinth
 
             this.IsExit = false;
             this.IsRestart = false;
-            this.movesCount = 0;
-            this.labyrinth = new LabyrinthEngine();
             this.scoreboard = scoreboard;
         }
 

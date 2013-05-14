@@ -11,12 +11,7 @@ namespace Labyrinth
     public class Scoreboard
     {
         private const int NUMBER_TOP_RESULTS = 5;
-        private List<Player> topPlayers;
-
-        public Scoreboard()
-        {
-            topPlayers = new List<Player>(NUMBER_TOP_RESULTS);
-        }
+        private List<Player> topPlayers = new List<Player>(NUMBER_TOP_RESULTS);        
 
         /// <summary>
         /// Add player to the scoreboard

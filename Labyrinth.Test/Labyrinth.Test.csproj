@@ -55,10 +55,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CellTest.cs" />
+    <Compile Include="DerivedLabyrinthEngine.cs" />
     <Compile Include="LabyrinthEngineTest.cs" />
     <Compile Include="PlayerTest.cs" />
     <Compile Include="ScoreboardTest.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
