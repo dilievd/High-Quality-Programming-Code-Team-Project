@@ -13,6 +13,7 @@ namespace Labyrinth
         private const char WALL_CELL = 'X';
         private const char PLAYER = '*';
         private const char VISITED = 'v';
+
         /// <summary>
         /// Represent number of rows and columns of the labyrinth
         /// </summary>
