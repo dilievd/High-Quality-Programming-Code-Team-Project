@@ -50,7 +50,8 @@ namespace Labyrinth
         {
             if (this.scoreboard.IsTopResult(this.movesCount))
             {
-                string name = ConsoleIO.GetInput(Message.EnterNameForScoreBoard);
+                ConsoleIO.Print(Message.EnterNameForScoreBoard, false);
+                string name = ConsoleIO.GetInput();
                 Player currentPlayer = new Player(name, this.movesCount);
                 this.scoreboard.AddPlayer(currentPlayer);
             }
@@ -64,7 +65,9 @@ namespace Labyrinth
             while (!isGameOver && !this.IsRestart && !this.IsExit)
             {
                 ConsoleIO.Print(this.labyrinth.ToString(), false);
-                input = ConsoleIO.GetInput(Message.EnterMove).ToUpper();
+
+                ConsoleIO.Print(Message.EnterMove, false);
+                input = ConsoleIO.GetInput().ToUpper();
                 this.ProcessInput(input);
 
                 isGameOver = this.labyrinth.ExitFound(this.labyrinth.CurrentCell);

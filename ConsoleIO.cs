@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace Labyrinth
 {
     /// <summary>
     /// Read the input and print the output on the console
     /// </summary>
-    internal static class ConsoleIO
+    public static class ConsoleIO
     {
         /// <summary>
         /// Print information on the console
@@ -14,27 +15,28 @@ namespace Labyrinth
         /// <param name="info">Information to be print</param>
         /// <param name="moveOnNewLine">To add or not new line</param>
         /// <param name="holder">To use or not placeholders</param>
-        internal static void Print(string info, bool moveOnNewLine, params string[] holder) 
+        public static string Print(string info, bool moveOnNewLine, params string[] holder) 
         {
-            Console.WriteLine();
-            string message = string.Format(info, holder);
+            StringBuilder result = new StringBuilder();
+            result.AppendLine();            
+            result.Append(string.Format(info, holder));
             if (moveOnNewLine)
             {
-                Console.WriteLine(message);
+                result.AppendLine();
             }
-            else
-            {
-                Console.Write(message);
-            }            
+
+            string resultToString = result.ToString();
+            Console.Write(resultToString);
+
+            return resultToString;                        
         }
 
         /// <summary>
         /// Read the input from the console
         /// </summary>
         /// <returns>Input from the console</returns>
-        public static string GetInput(string message)
+        public static string GetInput()
         {
-            ConsoleIO.Print(message, false);
             string inputLine = Console.ReadLine();
             return inputLine;
         }
