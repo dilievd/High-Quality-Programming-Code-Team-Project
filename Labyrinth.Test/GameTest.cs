@@ -13,11 +13,11 @@ namespace Labyrinth.Test
     [TestClass()]
     public class GameTest
     {
-        //[TestMethod()]
-        //[ExpectedException(typeof(ArgumentNullException))]
-        //public void GameWithNullScoreboard()
-        //{
-
-        //}
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GameWithNullScoreboard()
+        {
+            Game game = new Game(null);
+        }
     }
 }
