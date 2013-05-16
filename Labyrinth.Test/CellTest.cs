@@ -34,7 +34,7 @@ namespace Labyrinth.Test
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CellWithBiggerRowNumberBiggerThanSize()
         {
-            int row = LabyrinthEngine.LABYRINTH_SIZE;
+            int row = Engine.LABYRINTH_SIZE;
             int col = 1;
             char symbol = '*';
             Cell cell = new Cell(row, col, symbol);
@@ -45,7 +45,7 @@ namespace Labyrinth.Test
         public void CellWithColumnNumberBiggerThanSize()
         {
             int row = 1;
-            int col = LabyrinthEngine.LABYRINTH_SIZE;
+            int col = Engine.LABYRINTH_SIZE;
             char symbol = '*';
             Cell cell = new Cell(row, col, symbol);
         }
@@ -68,8 +68,8 @@ namespace Labyrinth.Test
         [TestMethod]
         public void CellWithRowAndColumnNumberEqualToSize()
         {
-            int row = LabyrinthEngine.LABYRINTH_SIZE - 1;
-            int col = LabyrinthEngine.LABYRINTH_SIZE - 1;
+            int row = Engine.LABYRINTH_SIZE - 1;
+            int col = Engine.LABYRINTH_SIZE - 1;
             char symbol = '*';
             Cell cell = new Cell(row, col, symbol);
 

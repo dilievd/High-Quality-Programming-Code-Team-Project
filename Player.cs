@@ -50,7 +50,7 @@ namespace Labyrinth
 
             private set
             {
-                if (value < LabyrinthEngine.LABYRINTH_SIZE / 2)
+                if (value < Engine.LABYRINTH_SIZE / 2)
                 {
                     throw new ArgumentException("Can not escape from labyrinth in " + 
                         "less moves than the shortest distance from center of the labyrinth!");

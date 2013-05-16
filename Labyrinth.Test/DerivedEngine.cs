@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Labyrinth.Test
 {
-    class DerivedLabyrinthEngine : LabyrinthEngine
+    class DerivedEngine : Engine
     {
         private int[,] labyrinthMatrix = new int[LABYRINTH_SIZE, LABYRINTH_SIZE];
 
-        public DerivedLabyrinthEngine(int[,] matrix) : base()
+        public DerivedEngine(int[,] matrix) : base()
         {
             this.labyrinthMatrix = matrix;
             this.CreateLabyrinth();

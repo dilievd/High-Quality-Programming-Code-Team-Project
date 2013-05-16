@@ -5,7 +5,7 @@ namespace Labyrinth
     public class Game
     {
         private Scoreboard scoreboard;
-        private LabyrinthEngine labyrinth = new LabyrinthEngine();
+        private Engine labyrinth = new Engine();
         private int movesCount = 0;
 
         public Game(Scoreboard scoreboard)
@@ -88,7 +88,7 @@ namespace Labyrinth
         /// </summary>
         /// <param name="input">Command</param>
         /// <returns>Is or is not a command for move</returns>
-        private bool ProcessMove(string input)
+        protected bool ProcessMove(string input)
         {
             bool isMoveDone = false;
             bool isMoveCommand = false;
@@ -131,7 +131,7 @@ namespace Labyrinth
         /// </summary>
         /// <param name="input">Command</param>
         /// <param name="isMoveCommand">Is the command command for move</param>
-        private void ProcessCommand(string input, bool isMoveCommand)
+        protected void ProcessCommand(string input, bool isMoveCommand)
         {            
             if (!isMoveCommand)
             {
@@ -152,7 +152,7 @@ namespace Labyrinth
                 {
                     ConsoleIO.Print(Message.InvalidCommand, true);
                 }
-            }         
+            }
         }
     }
 }

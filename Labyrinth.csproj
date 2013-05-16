@@ -57,7 +57,7 @@
     <Compile Include="Direction.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="LabyrinthDemo.cs" />
-    <Compile Include="LabyrinthEngine.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Player.cs" />

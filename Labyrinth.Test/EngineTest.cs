@@ -8,18 +8,18 @@ namespace Labyrinth.Test
     
     
     /// <summary>
-    ///This is a test class for LabyrinthEngineTest and is intended
-    ///to contain all LabyrinthEngineTest Unit Tests
+    ///This is a test class for EngineTest and is intended
+    ///to contain all EngineTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class LabyrinthEngineTest
+    public class EngineTest
     {
         private static string LabyrinthToString(Cell[,] matrix)
         {
             StringBuilder result = new StringBuilder();
-            for (int row = 0; row < LabyrinthEngine.LABYRINTH_SIZE; row++)
+            for (int row = 0; row < Engine.LABYRINTH_SIZE; row++)
             {
-                for (int column = 0; column < LabyrinthEngine.LABYRINTH_SIZE; column++)
+                for (int column = 0; column < Engine.LABYRINTH_SIZE; column++)
                 {
                     Cell cell = matrix[row, column];
                     result.Append(cell.Symbol + " ");
@@ -34,22 +34,22 @@ namespace Labyrinth.Test
         [TestMethod]        
         public void InitializeLabyrinthZeroMatrix() 
         {
-            int[,] matrix = new int[LabyrinthEngine.LABYRINTH_SIZE, LabyrinthEngine.LABYRINTH_SIZE];
-            DerivedLabyrinthEngine labyrinth = new DerivedLabyrinthEngine(matrix);
+            int[,] matrix = new int[Engine.LABYRINTH_SIZE, Engine.LABYRINTH_SIZE];
+            DerivedEngine labyrinth = new DerivedEngine(matrix);
 
             Cell[,] cellMatrix =
-                new Cell[LabyrinthEngine.LABYRINTH_SIZE, LabyrinthEngine.LABYRINTH_SIZE];
+                new Cell[Engine.LABYRINTH_SIZE, Engine.LABYRINTH_SIZE];
 
-            for (int row = 0; row < LabyrinthEngine.LABYRINTH_SIZE; row++)
+            for (int row = 0; row < Engine.LABYRINTH_SIZE; row++)
             {
-                for (int column = 0; column < LabyrinthEngine.LABYRINTH_SIZE; column++)
+                for (int column = 0; column < Engine.LABYRINTH_SIZE; column++)
                 {
-                    cellMatrix[row, column] = new Cell(row, column, LabyrinthEngine.EMPTY_CELL);
+                    cellMatrix[row, column] = new Cell(row, column, Engine.EMPTY_CELL);
                 }
             }
 
             cellMatrix[labyrinth.CurrentCell.Row, labyrinth.CurrentCell.Column] =
-                new Cell(labyrinth.CurrentCell.Row, labyrinth.CurrentCell.Column, LabyrinthEngine.PLAYER);
+                new Cell(labyrinth.CurrentCell.Row, labyrinth.CurrentCell.Column, Engine.PLAYER);
 
             Assert.AreEqual(labyrinth.ToString(), LabyrinthToString(cellMatrix));
         }
@@ -57,16 +57,16 @@ namespace Labyrinth.Test
         [TestMethod]
         public void TryMoveOnEmptyCell()
         {
-            var startRow = LabyrinthEngine.LABYRINTH_SIZE / 2;
-            var startCol = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            var startRow = Engine.LABYRINTH_SIZE / 2;
+            var startCol = Engine.LABYRINTH_SIZE / 2;
 
-            Cell cellOne = new Cell(startRow - 1, startCol, LabyrinthEngine.EMPTY_CELL);
-            Cell cellTwo = new Cell(startRow, startCol - 2, LabyrinthEngine.EMPTY_CELL);
-            Cell cellThree = new Cell(startRow, startCol - 3, LabyrinthEngine.EMPTY_CELL);
+            Cell cellOne = new Cell(startRow - 1, startCol, Engine.EMPTY_CELL);
+            Cell cellTwo = new Cell(startRow, startCol - 2, Engine.EMPTY_CELL);
+            Cell cellThree = new Cell(startRow, startCol - 3, Engine.EMPTY_CELL);
 
-            int[,] matrix = new int[LabyrinthEngine.LABYRINTH_SIZE, LabyrinthEngine.LABYRINTH_SIZE];
+            int[,] matrix = new int[Engine.LABYRINTH_SIZE, Engine.LABYRINTH_SIZE];
             matrix = CreateMatrixWithExit(cellOne, cellTwo, cellThree);
-            DerivedLabyrinthEngine labyrinth = new DerivedLabyrinthEngine(matrix);
+            DerivedEngine labyrinth = new DerivedEngine(matrix);
 
             bool moveSuccessful = labyrinth.TryMove(labyrinth.CurrentCell, Direction.Up);
 
@@ -78,7 +78,7 @@ namespace Labyrinth.Test
         public void TryMoveOnNonEmptyCell()
         {
             int[,] matrix = CreateMatrixWithExit();
-            DerivedLabyrinthEngine labyrinth = new DerivedLabyrinthEngine(matrix);
+            DerivedEngine labyrinth = new DerivedEngine(matrix);
 
             bool moveSuccessful = labyrinth.TryMove(labyrinth.CurrentCell, Direction.Left);
 
@@ -88,11 +88,11 @@ namespace Labyrinth.Test
 
         private int[,] CreateMatrixWithExit(params Cell[] exitPath)
         {
-            int[,] matrix = new int[LabyrinthEngine.LABYRINTH_SIZE, LabyrinthEngine.LABYRINTH_SIZE];
+            int[,] matrix = new int[Engine.LABYRINTH_SIZE, Engine.LABYRINTH_SIZE];
 
-            for (int row = 0; row < LabyrinthEngine.LABYRINTH_SIZE; row++)
+            for (int row = 0; row < Engine.LABYRINTH_SIZE; row++)
             {
-                for (int column = 0; column < LabyrinthEngine.LABYRINTH_SIZE; column++)
+                for (int column = 0; column < Engine.LABYRINTH_SIZE; column++)
                 {
                     matrix[row, column] = 1;
                 }

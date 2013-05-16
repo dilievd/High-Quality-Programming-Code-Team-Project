@@ -35,7 +35,7 @@ namespace Labyrinth
                     throw new ArgumentOutOfRangeException(
                         "Row number must be non-negative number!");
                 }
-                else if (value >= LabyrinthEngine.LABYRINTH_SIZE)
+                else if (value >= Engine.LABYRINTH_SIZE)
                 {
                     throw new ArgumentOutOfRangeException(
                         "Row number can not exceed the size of the labyrinth!");
@@ -62,7 +62,7 @@ namespace Labyrinth
                     throw new ArgumentOutOfRangeException(
                         "Column number must be non-negative number!");
                 }
-                else if (value >= LabyrinthEngine.LABYRINTH_SIZE)
+                else if (value >= Engine.LABYRINTH_SIZE)
                 {
                     throw new ArgumentOutOfRangeException(
                         "Column number can not exceed the size of the labyrinth!");

@@ -7,7 +7,7 @@ namespace Labyrinth
     /// <summary>
     /// Represent the labyrinth engine for the game
     /// </summary>
-    public class LabyrinthEngine
+    public class Engine
     {
         public const char EMPTY_CELL = '-';
         public const char WALL_CELL = 'X';
@@ -30,7 +30,7 @@ namespace Labyrinth
         /// </summary>
         public Cell CurrentCell { get; private set; }
 
-        public LabyrinthEngine()
+        public Engine()
         {
             this.CurrentCell = new Cell(this.startRow, this.startColumn, PLAYER);
             this.GenerateLabyrinth();
