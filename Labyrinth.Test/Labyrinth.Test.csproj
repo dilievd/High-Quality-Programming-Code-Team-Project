@@ -55,6 +55,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CellTest.cs" />
+    <Compile Include="ConsoleIOTest.cs" />
     <Compile Include="DerivedLabyrinthEngine.cs" />
     <Compile Include="LabyrinthEngineTest.cs" />
     <Compile Include="PlayerTest.cs" />

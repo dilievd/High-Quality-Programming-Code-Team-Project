@@ -29,6 +29,11 @@ namespace Labyrinth
             }
         }
 
+        public static void Clear()
+        {
+            instance = null;
+        }
+
         /// <summary>
         /// Add player to the scoreboard
         /// </summary>

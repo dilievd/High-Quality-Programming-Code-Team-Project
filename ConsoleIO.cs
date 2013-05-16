@@ -17,6 +17,12 @@ namespace Labyrinth
         /// <param name="holder">To use or not placeholders</param>
         public static string Print(string info, bool moveOnNewLine, params string[] holder) 
         {
+            if (info == null)
+            {
+                throw new ArgumentNullException(
+                    "Invalid input! message to be print cannot be null.");
+            }
+
             StringBuilder result = new StringBuilder();
             result.AppendLine();            
             result.Append(string.Format(info, holder));
