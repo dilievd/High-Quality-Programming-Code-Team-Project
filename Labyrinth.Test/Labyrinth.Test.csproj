@@ -55,11 +55,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CellTest.cs" />
+    <Compile Include="ConsoleIOTest.cs" />
     <Compile Include="DerivedLabyrinthEngine.cs" />
+    <Compile Include="GameTest.cs" />
     <Compile Include="LabyrinthEngineTest.cs" />
     <Compile Include="PlayerTest.cs" />
     <Compile Include="ScoreboardTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DirectionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Labyrinth.csproj">

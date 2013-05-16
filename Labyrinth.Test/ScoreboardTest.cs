@@ -15,7 +15,8 @@ namespace Labyrinth.Test
         [TestMethod]
         public void ToStringWithNoPlayers()
         {
-            Scoreboard scoreboard = new Scoreboard();
+            Scoreboard.Clear();
+            Scoreboard scoreboard = Scoreboard.Instance;
             string result = scoreboard.ToString();
             Assert.AreEqual("The scoreboard is empty.", result);
         }
@@ -23,7 +24,8 @@ namespace Labyrinth.Test
         [TestMethod]
         public void ToStringWithOnePlayer()
         {
-            Scoreboard scoreboard = new Scoreboard();
+            Scoreboard.Clear();
+            Scoreboard scoreboard = Scoreboard.Instance;
             Player player = new Player("Bai Ivan", 5);
             scoreboard.AddPlayer(player);
             StringBuilder resultList = new StringBuilder();
@@ -32,32 +34,35 @@ namespace Labyrinth.Test
             resultList.AppendLine(formatPlayer);
             string result = scoreboard.ToString();
 
+            //scoreboard = null;
             Assert.AreEqual(resultList.ToString(), result);
+            //scoreboard = null;
         }
 
         [TestMethod]
         public void ToStringWithTwoPlayers()
         {
-            Scoreboard scoreboard = new Scoreboard();
+            Scoreboard.Clear();
+            Scoreboard scoreboard = Scoreboard.Instance;
             Player player1 = new Player("Bai Ivan", 5);
             Player player2 = new Player("Bai Marin", 3);
             scoreboard.AddPlayer(player1);
             scoreboard.AddPlayer(player2);
+            string result = scoreboard.ToString();
             StringBuilder resultList = new StringBuilder();
             resultList.AppendLine("Scoreboard:");
-            string formatPlayer1 = string.Format("1. {0} --> {1} moves", player2.Name, player2.MovesCount);
-            string formatPlayer2 = string.Format("2. {0} --> {1} moves", player1.Name, player1.MovesCount);
-            resultList.AppendLine(formatPlayer1);
-            resultList.AppendLine(formatPlayer2);
-            string result = scoreboard.ToString();
+            resultList.AppendLine("1. Bai Marin --> 3 moves");
+            resultList.AppendLine("2. Bai Ivan --> 5 moves");
+            string resultListToString = resultList.ToString();
 
-            Assert.AreEqual(resultList.ToString(), result);
+            Assert.AreEqual(resultListToString, result);
         }
 
         [TestMethod]
         public void IsTopResultWhenResultsAreLessThan5()
         {
-            Scoreboard scoreboard = new Scoreboard();
+            Scoreboard.Clear();
+            Scoreboard scoreboard = Scoreboard.Instance;
             Player player1 = new Player("Jane", 4);
             scoreboard.AddPlayer(player1);
             bool result = scoreboard.IsTopResult(5);
@@ -68,7 +73,8 @@ namespace Labyrinth.Test
         [TestMethod]
         public void IsTopResultWithBetterResult()
         {
-            Scoreboard scoreboard = new Scoreboard();
+            Scoreboard.Clear();
+            Scoreboard scoreboard = Scoreboard.Instance;
             Player player1 = new Player("Jane", 4);
             Player player2 = new Player("Peter", 3);
             Player player3 = new Player("Sam", 7);
@@ -88,7 +94,8 @@ namespace Labyrinth.Test
         [TestMethod]
         public void IsTopResultWithWorstResult()
         {
-            Scoreboard scoreboard = new Scoreboard();
+            Scoreboard.Clear();
+            Scoreboard scoreboard = Scoreboard.Instance;
             Player player1 = new Player("Jane", 4);
             Player player2 = new Player("Peter", 3);
             Player player3 = new Player("Sam", 7);
@@ -108,11 +115,12 @@ namespace Labyrinth.Test
         [TestMethod]
         public void AddPlayerWhenScoreboardHas5Results()
         {
-            Scoreboard scoreboard = new Scoreboard();
+            Scoreboard.Clear();
+            Scoreboard scoreboard = Scoreboard.Instance;
             Player player1 = new Player("Jane", 4);
             Player player2 = new Player("Peter", 3);
             Player player3 = new Player("Sam", 7);
-            Player player4 = new Player("Peter", 8);
+            Player player4 = new Player("Pit", 8);
             Player player5 = new Player("Sara", 6);
             scoreboard.AddPlayer(player1);
             scoreboard.AddPlayer(player2);
