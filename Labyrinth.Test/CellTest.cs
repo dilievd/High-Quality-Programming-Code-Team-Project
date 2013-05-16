@@ -1,5 +1,4 @@
-﻿using Labyrinth;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace Labyrinth.Test

@@ -60,6 +60,7 @@
     <Compile Include="PlayerTest.cs" />
     <Compile Include="ScoreboardTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DirectionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Labyrinth.csproj">
