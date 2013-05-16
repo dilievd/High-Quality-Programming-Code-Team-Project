@@ -22,7 +22,7 @@ namespace Labyrinth
         }
 
         /// <summary>
-        /// Show is or is not entered EXIT command
+        /// Show whether is entered EXIT command
         /// </summary>
         public bool IsExit { get; private set; }
 
