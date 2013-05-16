@@ -11,10 +11,12 @@ namespace Labyrinth
     public sealed class Scoreboard
     {
         private const int NUMBER_TOP_RESULTS = 5;
-        private List<Player> topPlayers = new List<Player>(NUMBER_TOP_RESULTS);        
         private static Scoreboard instance;
+        private List<Player> topPlayers = new List<Player>(NUMBER_TOP_RESULTS);        
 
-        private Scoreboard() { }
+        private Scoreboard()
+        { 
+        }
 
         public static Scoreboard Instance
         {
@@ -81,7 +83,7 @@ namespace Labyrinth
             StringBuilder resultList = new StringBuilder();
             if (this.topPlayers.Count == 0)
             {
-                resultList.Append(Message.ScoreBoardEmpty);
+                resultList.Append(Message.SCOREBOARD_EMPTY);
             }
             else
             {
@@ -89,7 +91,7 @@ namespace Labyrinth
                 for (int index = 0; index < this.topPlayers.Count; index++)
                 {
                     string currentResult = string.Format("{0}. {1} --> {2} moves",
-                        index + 1, topPlayers[index].Name, topPlayers[index].MovesCount);
+                        index + 1, this.topPlayers[index].Name, this.topPlayers[index].MovesCount);
                     resultList.AppendLine(currentResult);
                 }
             }

@@ -32,12 +32,12 @@ namespace Labyrinth
         /// </summary>
         public void Play()
         {
-            ConsoleIO.Print(Message.Welcome, true);
+            ConsoleIO.Print(Message.WELCOME, true);
             RunGame();
 
             if (!this.isRestart && !this.IsExit)
             {
-                ConsoleIO.Print(Message.Win, false, this.movesCount.ToString());
+                ConsoleIO.Print(Message.WIN, false, this.movesCount.ToString());
                 AddResultToScoreBoard();
                 ConsoleIO.Print(this.scoreboard.ToString(), false);
             }
@@ -47,7 +47,7 @@ namespace Labyrinth
         {
             if (this.scoreboard.IsTopResult(this.movesCount))
             {
-                ConsoleIO.Print(Message.EnterNameForScoreBoard, false);
+                ConsoleIO.Print(Message.ENTER_NAME_FOR_SCOREBOARD, false);
                 string name = ConsoleIO.GetInput();
                 Player currentPlayer = new Player(name, this.movesCount);
                 this.scoreboard.AddPlayer(currentPlayer);
@@ -63,7 +63,7 @@ namespace Labyrinth
             {
                 ConsoleIO.Print(this.labyrinth.ToString(), false);
 
-                ConsoleIO.Print(Message.EnterMove, false);
+                ConsoleIO.Print(Message.ENTER_MOVE, false);
                 input = ConsoleIO.GetInput().ToUpper();
                 this.ProcessInput(input);
 
@@ -119,7 +119,7 @@ namespace Labyrinth
 
             if (!isMoveDone && isMoveCommand)
             {
-                ConsoleIO.Print(Message.InvalidMove, true);
+                ConsoleIO.Print(Message.INVALID_MOVE, true);
             }
 
             return isMoveCommand;
@@ -139,8 +139,8 @@ namespace Labyrinth
                     ConsoleIO.Print(this.scoreboard.ToString(), true);
                 }
                 else if (input == "EXIT")
-                {                    
-                    ConsoleIO.Print(Message.GoodBye, true);
+                {
+                    ConsoleIO.Print(Message.GOOD_BYE, true);
                     this.IsExit = true;
                 }
                 else if (input == "RESTART")
@@ -149,7 +149,7 @@ namespace Labyrinth
                 }
                 else
                 {
-                    ConsoleIO.Print(Message.InvalidCommand, true);
+                    ConsoleIO.Print(Message.INVALID_COMMAND, true);
                 }
             }
         }
