@@ -53,6 +53,60 @@ namespace Labyrinth.Test
 
             Assert.AreEqual(labyrinth.ToString(), LabyrinthToString(cellMatrix));
         }
+
+        [TestMethod]
+        public void TryMoveOnEmptyCell()
+        {
+            var startRow = LabyrinthEngine.LABYRINTH_SIZE / 2;
+            var startCol = LabyrinthEngine.LABYRINTH_SIZE / 2;
+
+            Cell cellOne = new Cell(startRow - 1, startCol, LabyrinthEngine.EMPTY_CELL);
+            Cell cellTwo = new Cell(startRow, startCol - 2, LabyrinthEngine.EMPTY_CELL);
+            Cell cellThree = new Cell(startRow, startCol - 3, LabyrinthEngine.EMPTY_CELL);
+
+            int[,] matrix = new int[LabyrinthEngine.LABYRINTH_SIZE, LabyrinthEngine.LABYRINTH_SIZE];
+            matrix = CreateMatrixWithExit(cellOne, cellTwo, cellThree);
+            DerivedLabyrinthEngine labyrinth = new DerivedLabyrinthEngine(matrix);
+
+            bool moveSuccessful = labyrinth.TryMove(labyrinth.CurrentCell, Direction.Up);
+
+
+            Assert.AreEqual(true, moveSuccessful);
+        }
+
+        [TestMethod]
+        public void TryMoveOnNonEmptyCell()
+        {
+            int[,] matrix = CreateMatrixWithExit();
+            DerivedLabyrinthEngine labyrinth = new DerivedLabyrinthEngine(matrix);
+
+            bool moveSuccessful = labyrinth.TryMove(labyrinth.CurrentCell, Direction.Left);
+
+
+            Assert.AreEqual(false, moveSuccessful);
+        }
+
+        private int[,] CreateMatrixWithExit(params Cell[] exitPath)
+        {
+            int[,] matrix = new int[LabyrinthEngine.LABYRINTH_SIZE, LabyrinthEngine.LABYRINTH_SIZE];
+
+            for (int row = 0; row < LabyrinthEngine.LABYRINTH_SIZE; row++)
+            {
+                for (int column = 0; column < LabyrinthEngine.LABYRINTH_SIZE; column++)
+                {
+                    matrix[row, column] = 1;
+                }
+            }
+
+            foreach (var cell in exitPath)
+            {
+                int cellRow = cell.Row;
+                int cellCol = cell.Column;
+                matrix[cellRow, cellCol] = 0;
+            }
+
+            return matrix;
+        }
         #region
         //[TestMethod]
         //public void TryMoveTest()

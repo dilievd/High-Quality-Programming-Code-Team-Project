@@ -13,6 +13,7 @@ namespace Labyrinth.Test
         public DerivedLabyrinthEngine(int[,] matrix) : base()
         {
             this.labyrinthMatrix = matrix;
+            this.CreateLabyrinth();
         }
 
         protected override void CreateLabyrinth()
