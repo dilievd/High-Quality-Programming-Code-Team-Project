@@ -90,8 +90,11 @@ namespace Labyrinth
                 resultList.AppendLine("Scoreboard:");
                 for (int index = 0; index < this.topPlayers.Count; index++)
                 {
-                    string currentResult = string.Format("{0}. {1} --> {2} moves",
-                        index + 1, this.topPlayers[index].Name, this.topPlayers[index].MovesCount);
+                    string currentResult = string.Format(
+                        "{0}. {1} --> {2} moves",
+                        index + 1, 
+                        this.topPlayers[index].Name,
+                        this.topPlayers[index].MovesCount);
                     resultList.AppendLine(currentResult);
                 }
             }
