@@ -5,7 +5,7 @@ namespace Labyrinth
     /// <summary>
     /// Represent messages printed for the user
     /// </summary>
-    internal struct Message
+    public struct Message
     {
         public const string InvalidMove = "Invalid move!";
         public const string Welcome = "Welcome to \"Labyrinth\" game. Please try to escape." +
