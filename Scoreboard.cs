@@ -8,10 +8,26 @@ namespace Labyrinth
     /// <summary>
     /// Represent the list of players with top results 
     /// </summary>
-    public class Scoreboard
+    public sealed class Scoreboard
     {
         private const int NUMBER_TOP_RESULTS = 5;
         private List<Player> topPlayers = new List<Player>(NUMBER_TOP_RESULTS);        
+        private static Scoreboard instance;
+
+        private Scoreboard() { }
+
+        public static Scoreboard Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Scoreboard();
+                }
+
+                return instance;
+            }
+        }
 
         /// <summary>
         /// Add player to the scoreboard

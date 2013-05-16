@@ -9,7 +9,7 @@ namespace Labyrinth
         /// </summary>
         public static void Main()
         {
-            Scoreboard scoreboard = new Scoreboard();
+            Scoreboard scoreboard = Scoreboard.Instance;
             bool startNewGame = true;
             while (startNewGame)
             {
