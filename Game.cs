@@ -7,6 +7,7 @@ namespace Labyrinth
         private Scoreboard scoreboard;
         private Engine labyrinth = new Engine();
         private int movesCount = 0;
+        private bool isRestart = false;
 
         public Game(Scoreboard scoreboard)
         {
@@ -17,7 +18,7 @@ namespace Labyrinth
             }
 
             this.IsExit = false;
-            this.IsRestart = false;
+            this.isRestart = false;
             this.scoreboard = scoreboard;
         }
 
@@ -25,8 +26,6 @@ namespace Labyrinth
         /// Show whether is entered EXIT command
         /// </summary>
         public bool IsExit { get; private set; }
-
-        private bool IsRestart { get; set; }
 
         /// <summary>
         /// Run the game
@@ -36,7 +35,7 @@ namespace Labyrinth
             ConsoleIO.Print(Message.Welcome, true);
             RunGame();
 
-            if (!this.IsRestart && !this.IsExit)
+            if (!this.isRestart && !this.IsExit)
             {
                 ConsoleIO.Print(Message.Win, false, this.movesCount.ToString());
                 AddResultToScoreBoard();
@@ -60,7 +59,7 @@ namespace Labyrinth
             string input = string.Empty;
             bool isGameOver = this.labyrinth.ExitFound(this.labyrinth.CurrentCell);
 
-            while (!isGameOver && !this.IsRestart && !this.IsExit)
+            while (!isGameOver && !this.isRestart && !this.IsExit)
             {
                 ConsoleIO.Print(this.labyrinth.ToString(), false);
 
@@ -146,7 +145,7 @@ namespace Labyrinth
                 }
                 else if (input == "RESTART")
                 {
-                    this.IsRestart = true;                    
+                    this.isRestart = true;                    
                 }
                 else
                 {
