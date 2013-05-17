@@ -21,14 +21,14 @@ namespace Labyrinth.Test
         [TestMethod]
         public void ConsoleIOPrintMessageInvalidMove()
         {
-            string invalidMove = ConsoleIO.Print(Message.InvalidMove, false);
+            string invalidMove = ConsoleIO.Print(Message.INVALID_MOVE, false);
             Assert.AreEqual(Environment.NewLine.ToString() + "Invalid move!", invalidMove);
         }
 
         [TestMethod]
         public void ConsoleIOPrintMessageWelcome()
         {
-            string welcome = ConsoleIO.Print(Message.Welcome, false);
+            string welcome = ConsoleIO.Print(Message.WELCOME, false);
             Assert.AreEqual(Environment.NewLine.ToString() + 
                 "Welcome to \"Labyrinth\" game. Please try to escape." +
                 "\nUse 'top' to view the top scoreboard, 'restart' to start a new game" + 
@@ -39,7 +39,7 @@ namespace Labyrinth.Test
         [TestMethod]
         public void ConsoleIOPrintMessageEnterMove()
         {
-            string enterMove = ConsoleIO.Print(Message.EnterMove, true);
+            string enterMove = ConsoleIO.Print(Message.ENTER_MOVE, true);
             Assert.AreEqual(Environment.NewLine.ToString() + 
                 "Enter your move (L=left, R-right, U=up, D=down): " +
                 Environment.NewLine.ToString(), enterMove);
@@ -48,7 +48,7 @@ namespace Labyrinth.Test
         [TestMethod]
         public void ConsoleIOPrintMessageEnterNameForScoreBoard()
         {
-            string enterNameForScoreBoard = ConsoleIO.Print(Message.EnterNameForScoreBoard, false);
+            string enterNameForScoreBoard = ConsoleIO.Print(Message.ENTER_NAME_FOR_SCOREBOARD, false);
             Assert.AreEqual(Environment.NewLine.ToString() + 
                 "Please enter your name for the top scoreboard: ", enterNameForScoreBoard);
         }
@@ -56,7 +56,7 @@ namespace Labyrinth.Test
         [TestMethod]
         public void ConsoleIOPrintMessageInvalidCommand()
         {
-            string invalidCommand = ConsoleIO.Print(Message.InvalidCommand, true);
+            string invalidCommand = ConsoleIO.Print(Message.INVALID_COMMAND, true);
             Assert.AreEqual(Environment.NewLine.ToString() +
                 "Invalid command!" + Environment.NewLine.ToString(), invalidCommand);    
         }
@@ -64,7 +64,7 @@ namespace Labyrinth.Test
         [TestMethod]
         public void ConsoleIOPrintMessageGoodBye()
         {
-            string goodBye = ConsoleIO.Print(Message.GoodBye, false);
+            string goodBye = ConsoleIO.Print(Message.GOOD_BYE, false);
             Assert.AreEqual(Environment.NewLine.ToString() + 
                 "Goodbye!", goodBye);
         }
@@ -72,7 +72,7 @@ namespace Labyrinth.Test
         [TestMethod]
         public void ConsoleIOPrintMessageWin()
         {
-            string win = ConsoleIO.Print(Message.Win, false, "5");
+            string win = ConsoleIO.Print(Message.WIN, false, "5");
             Assert.AreEqual(Environment.NewLine.ToString() + 
                 "Congratulations! You escaped in 5 moves.", win);
         }
@@ -83,8 +83,8 @@ namespace Labyrinth.Test
             Scoreboard.Clear();
             Scoreboard scoreboard = Scoreboard.Instance;
             string result = ConsoleIO.Print(scoreboard.ToString(), true);
-            string expectedMessage = Environment.NewLine.ToString() + 
-                Message.ScoreBoardEmpty + Environment.NewLine.ToString();
+            string expectedMessage = Environment.NewLine.ToString() +
+                Message.SCOREBOARD_EMPTY + Environment.NewLine.ToString();
             Assert.AreEqual(expectedMessage, result);
         }
 
