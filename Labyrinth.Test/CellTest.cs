@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Labyrinth.Test
 {
@@ -7,7 +7,7 @@ namespace Labyrinth.Test
     /// This is a test class for Cell and is intended
     /// to contain all Cell Unit Tests
     /// </summary>
-    [TestClass()]
+    [TestClass]
     public class CellTest
     {
         [TestMethod]

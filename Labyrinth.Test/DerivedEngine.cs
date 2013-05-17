@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Labyrinth.Test
 {
-    class DerivedEngine : Engine
+    /// <summary>
+    /// This class is derived from Engine so 
+    /// that we can test Engine methods
+    /// </summary>
+    public class DerivedEngine : Engine
     {
-        private int[,] labyrinthMatrix = new int[LABYRINTH_SIZE, LABYRINTH_SIZE];
+        private readonly int[,] labyrinthMatrix = new int[LABYRINTH_SIZE, LABYRINTH_SIZE];
 
         public DerivedEngine(int[,] matrix) : base()
         {
@@ -18,9 +19,9 @@ namespace Labyrinth.Test
 
         protected override void CreateLabyrinth()
         {
-            for (int row = 0; row < LABYRINTH_SIZE; row++)
+            for (int row = 0; row < Engine.LABYRINTH_SIZE; row++)
             {
-                for (int column = 0; column < LABYRINTH_SIZE; column++)
+                for (int column = 0; column < Engine.LABYRINTH_SIZE; column++)
                 {                    
                     if (this.labyrinthMatrix[row, column] == 0)
                     {
@@ -34,11 +35,11 @@ namespace Labyrinth.Test
                     }
                 }
             }
+
             this.labyrinth[this.CurrentCell.Row, this.CurrentCell.Column] =
                 new Cell(this.CurrentCell.Row, this.CurrentCell.Column, PLAYER);
             this.dummyLabyrinth[this.CurrentCell.Row, this.CurrentCell.Column] =
                 new Cell(this.CurrentCell.Row, this.CurrentCell.Column, PLAYER);
         }
-
     }
 }
