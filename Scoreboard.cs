@@ -18,6 +18,11 @@ namespace Labyrinth
         { 
         }
 
+        /// <summary>
+        /// Create instance of scoreboard of its current value null
+        /// or return already created one if not
+        /// </summary>
+        /// <remarks>Impement Singleton Disign Pattern</remarks>
         public static Scoreboard Instance
         {
             get
@@ -31,6 +36,10 @@ namespace Labyrinth
             }
         }
 
+        /// <summary>
+        /// Clear the results saved in the scoreboard
+        /// </summary>
+        /// <remarks>Used for testing</remarks>
         public static void Clear()
         {
             instance = null;

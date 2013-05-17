@@ -30,6 +30,9 @@ namespace Labyrinth
         /// </summary>
         public Cell CurrentCell { get; private set; }
 
+        /// <summary>
+        /// Create engine
+        /// </summary>
         public Engine()
         {
             this.CurrentCell = new Cell(this.startRow, this.startColumn, PLAYER);

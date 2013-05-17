@@ -8,8 +8,14 @@ namespace Labyrinth
     public class Player: IComparable<Player>
     {
         private string name;
-        private int movesCount; 
+        private int movesCount;
 
+        /// <summary>
+        /// Create player
+        /// </summary>
+        /// <param name="name">Name of the player</param>
+        /// <param name="movesCount">Result
+        /// (number of moves to escape from the labyrinth) of the player</param>
         public Player(string name, int movesCount)
         {
             this.Name = name;
@@ -19,6 +25,8 @@ namespace Labyrinth
         /// <summary>
         /// Represent the name of the plyer
         /// </summary>
+        /// <exception cref="ArgumentNullException">
+        /// If the name is null or empty string</exception>
         public string Name 
         {
             get
@@ -41,6 +49,8 @@ namespace Labyrinth
         /// <summary>
         /// Represent the result of the player (number of moves to escape from the labyrinth)
         /// </summary>
+        /// <exception cref="ArgumentException">
+        /// If the result is less than the min number moves to escape</exception>
         public int MovesCount
         {
             get

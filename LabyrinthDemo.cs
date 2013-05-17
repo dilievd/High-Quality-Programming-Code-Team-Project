@@ -2,11 +2,11 @@
 
 namespace Labyrinth
 {
+    /// <summary>
+    /// Represent a demo of the project - start point
+    /// </summary>
     public class LabyrinthDemo
     {
-        /// <summary>
-        /// Start the game
-        /// </summary>
         public static void Main()
         {
             Scoreboard scoreboard = Scoreboard.Instance;

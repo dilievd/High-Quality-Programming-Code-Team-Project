@@ -9,6 +9,12 @@ namespace Labyrinth
         private int movesCount = 0;
         private bool isRestart = false;
 
+        /// <summary>
+        /// Create game
+        /// </summary>
+        /// <param name="scoreboard">Used scoreboard to save the results</param>
+        /// <exception cref="ArgumentNullException">
+        /// If the used scoreboard is null</exception>
         public Game(Scoreboard scoreboard)
         {
             if (scoreboard == null)
@@ -28,7 +34,7 @@ namespace Labyrinth
         public bool IsExit { get; private set; }
 
         /// <summary>
-        /// Run the game
+        /// Satrt game
         /// </summary>
         public void Play()
         {
@@ -43,17 +49,9 @@ namespace Labyrinth
             }
         }
 
-        private void AddResultToScoreBoard()
-        {
-            if (this.scoreboard.IsTopResult(this.movesCount))
-            {
-                ConsoleIO.Print(Message.ENTER_NAME_FOR_SCOREBOARD, false);
-                string name = ConsoleIO.GetInput();
-                Player currentPlayer = new Player(name, this.movesCount);
-                this.scoreboard.AddPlayer(currentPlayer);
-            }
-        }
-
+        /// <summary>
+        /// Run game - read commands and process them
+        /// </summary>
         private void RunGame()
         {
             string input = string.Empty;
@@ -68,6 +66,20 @@ namespace Labyrinth
                 this.ProcessInput(input);
 
                 isGameOver = this.labyrinth.ExitFound(this.labyrinth.CurrentCell);
+            }
+        }
+
+        /// <summary>
+        /// Add result of the game to the scoreboard
+        /// </summary>
+        private void AddResultToScoreBoard()
+        {
+            if (this.scoreboard.IsTopResult(this.movesCount))
+            {
+                ConsoleIO.Print(Message.ENTER_NAME_FOR_SCOREBOARD, false);
+                string name = ConsoleIO.GetInput();
+                Player currentPlayer = new Player(name, this.movesCount);
+                this.scoreboard.AddPlayer(currentPlayer);
             }
         }
 

@@ -15,6 +15,8 @@ namespace Labyrinth
         /// <param name="info">Information to be print</param>
         /// <param name="moveOnNewLine">To add or not new line</param>
         /// <param name="holder">To use or not placeholders</param>
+        /// <exception cref="ArgumentNullException">
+        /// If the information to be print is null</exception>
         public static string Print(string info, bool moveOnNewLine, params string[] holder) 
         {
             if (info == null)

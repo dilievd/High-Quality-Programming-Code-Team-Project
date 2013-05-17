@@ -11,6 +11,12 @@ namespace Labyrinth
         private int column;
         private char symbol;
 
+        /// <summary>
+        /// Create cell
+        /// </summary>
+        /// <param name="row">Row of the cell</param>
+        /// <param name="column">Column of the cell</param>
+        /// <param name="symbol">Symbol of the cell</param>
         public Cell(int row, int column, char symbol)
         {
             this.Row = row;
@@ -21,6 +27,8 @@ namespace Labyrinth
         /// <summary>
         /// Represent cell's row in the labyrinth
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// If the row is a number outside the interval [0, Engine.LABYRINTH_SIZE]</exception>
         public int Row
         {
             get
@@ -48,6 +56,8 @@ namespace Labyrinth
         /// <summary>
         /// Represent cell's column in the labyrinth
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// If the column is a number outside the interval [0, Engine.LABYRINTH_SIZE]</exception>
         public int Column
         {
             get
@@ -75,6 +85,8 @@ namespace Labyrinth
         /// <summary>
         /// Represent cell's symbol in the labyrinth
         /// </summary>
+        /// <exception cref="ArgumentException">
+        /// If the symbol is white space</exception>
         public char Symbol
         {
             get
