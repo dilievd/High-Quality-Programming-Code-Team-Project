@@ -49,7 +49,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void ConsoleIOPrintMessageEnterNameForScoreBoard()
+        public void ConsoleIOPrintMessageEnterNameForScoreboard()
         {
             string enterNameForScoreBoard = 
                 ConsoleIO.Print(Message.ENTER_NAME_FOR_SCOREBOARD, false);
@@ -70,9 +70,9 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void ConsoleIOPrintMessageGoodBye()
+        public void ConsoleIOPrintMessageGoodbye()
         {
-            string goodBye = ConsoleIO.Print(Message.GOOD_BYE, false);
+            string goodBye = ConsoleIO.Print(Message.GOODBYE, false);
             Assert.AreEqual(
                 Environment.NewLine.ToString() + "Goodbye!", 
                 goodBye);
@@ -89,7 +89,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void ConsoleIOPrintMessagescoreBoardEmpty()
+        public void ConsoleIOPrintMessageScoreboardEmpty()
         {
             Scoreboard.Clear();
             Scoreboard scoreboard = Scoreboard.Instance;

@@ -5,7 +5,7 @@ namespace Labyrinth
     /// <summary>
     /// Represent a demo of the project - start point
     /// </summary>
-    public class LabyrinthDemo
+    public class Demo
     {
         public static void Main()
         {

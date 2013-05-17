@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using Labyrinth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Labyrinth.Test
@@ -13,7 +12,7 @@ namespace Labyrinth.Test
     public class EngineTest
     {
         [TestMethod]
-        public void InitializeLabyrinthZeroMatrix()
+        public void EngineInitializeLabyrinthZeroMatrix()
         {
             int[,] matrix = new int[Engine.LABYRINTH_SIZE, Engine.LABYRINTH_SIZE];
             DerivedEngine labyrinth = new DerivedEngine(matrix);
@@ -36,7 +35,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void TryMoveOnEmptyCell()
+        public void EngineTryMoveOnEmptyCell()
         {
             var startRow = Engine.LABYRINTH_SIZE / 2;
             var startCol = Engine.LABYRINTH_SIZE / 2;
@@ -55,7 +54,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void TryMoveOnNonEmptyCell()
+        public void EngineTryMoveOnNonEmptyCell()
         {
             int[,] matrix = this.CreateMatrixWithExit();
             DerivedEngine labyrinth = new DerivedEngine(matrix);

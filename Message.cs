@@ -15,7 +15,7 @@ namespace Labyrinth
         public const string ENTER_NAME_FOR_SCOREBOARD = "Please enter your name for the top scoreboard: ";
         public const string SCOREBOARD_EMPTY = "The scoreboard is empty.";
         public const string INVALID_COMMAND = "Invalid command!";
-        public const string GOOD_BYE = "Goodbye!";
+        public const string GOODBYE = "Goodbye!";
         public const string WIN = "Congratulations! You escaped in {0} moves.";
     }
 }

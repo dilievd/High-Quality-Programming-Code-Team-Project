@@ -152,7 +152,7 @@ namespace Labyrinth
                 }
                 else if (input == "EXIT")
                 {
-                    ConsoleIO.Print(Message.GOOD_BYE, true);
+                    ConsoleIO.Print(Message.GOODBYE, true);
                     this.IsExit = true;
                 }
                 else if (input == "RESTART")

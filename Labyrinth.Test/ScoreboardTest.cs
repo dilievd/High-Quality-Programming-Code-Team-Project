@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using Labyrinth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Labyrinth.Test
@@ -13,7 +12,7 @@ namespace Labyrinth.Test
     public class ScoreboardTest
     {
         [TestMethod]
-        public void ToStringWithNoPlayers()
+        public void ScoreboardToStringWithNoPlayers()
         {
             Scoreboard.Clear();
             Scoreboard scoreboard = Scoreboard.Instance;
@@ -22,7 +21,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void ToStringWithOnePlayer()
+        public void ScoreboardToStringWithOnePlayer()
         {
             Scoreboard.Clear();
             Scoreboard scoreboard = Scoreboard.Instance;
@@ -38,7 +37,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void ToStringWithTwoPlayers()
+        public void ScoreboardToStringWithTwoPlayers()
         {
             Scoreboard.Clear();
             Scoreboard scoreboard = Scoreboard.Instance;
@@ -57,7 +56,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void IsTopResultWhenResultsAreLessThan5()
+        public void ScoreboardIsTopResultWhenResultsAreLessThan5()
         {
             Scoreboard.Clear();
             Scoreboard scoreboard = Scoreboard.Instance;
@@ -69,7 +68,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void IsTopResultWithBetterResult()
+        public void ScoreboardIsTopResultWithBetterResult()
         {
             Scoreboard.Clear();
             Scoreboard scoreboard = Scoreboard.Instance;
@@ -90,7 +89,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void IsTopResultWithWorstResult()
+        public void ScoreboardIsTopResultWithWorstResult()
         {
             Scoreboard.Clear();
             Scoreboard scoreboard = Scoreboard.Instance;
@@ -111,7 +110,7 @@ namespace Labyrinth.Test
         }
 
         [TestMethod]
-        public void AddPlayerWhenScoreboardHas5Results()
+        public void ScoreboardAddPlayerWhenScoreboardHas5Results()
         {
             Scoreboard.Clear();
             Scoreboard scoreboard = Scoreboard.Instance;
