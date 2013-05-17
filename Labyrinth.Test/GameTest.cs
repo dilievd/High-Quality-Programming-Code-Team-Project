@@ -1,6 +1,6 @@
-﻿using Labyrinth;
+﻿using System;
+using Labyrinth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Labyrinth.Test
 {
@@ -8,10 +8,10 @@ namespace Labyrinth.Test
     /// This is a test class for Game and is intended
     /// to contain all Game Unit Tests
     /// </summary>
-    [TestClass()]
+    [TestClass]
     public class GameTest
     {
-        [TestMethod()]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void GameWithNullScoreboard()
         {

@@ -1,15 +1,15 @@
-﻿using Labyrinth;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Text;
+using Labyrinth;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Labyrinth.Test
 {
     /// <summary>
-    ///This is a test class for ScoreboardTest and is intended
-    ///to contain all ScoreboardTest Unit Tests
-    ///</summary>
-    [TestClass()]
+    /// This is a test class for ScoreboardTest and is intended
+    /// to contain all ScoreboardTest Unit Tests
+    /// </summary>
+    [TestClass]
     public class ScoreboardTest
     {
         [TestMethod]
@@ -34,9 +34,7 @@ namespace Labyrinth.Test
             resultList.AppendLine(formatPlayer);
             string result = scoreboard.ToString();
 
-            //scoreboard = null;
             Assert.AreEqual(resultList.ToString(), result);
-            //scoreboard = null;
         }
 
         [TestMethod]

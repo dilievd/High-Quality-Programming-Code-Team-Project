@@ -19,14 +19,14 @@ namespace Labyrinth.Test
 
         public bool DerivedProcessMove(string input)
         {
-            bool result = base.ProcessMove(input);
+            bool result = this.ProcessMove(input);
             return result;
         }
 
         public bool DerivedProcessCommand(string input, bool isValidMove)
         {
-            base.ProcessCommand(input, isValidMove);
-            return base.IsExit;
+            this.ProcessCommand(input, isValidMove);
+            return this.IsExit;
         }
     }
 }

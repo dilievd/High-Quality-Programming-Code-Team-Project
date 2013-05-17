@@ -1,6 +1,6 @@
-﻿using Labyrinth;
+﻿using System;
+using Labyrinth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Labyrinth.Test
 {
@@ -8,7 +8,7 @@ namespace Labyrinth.Test
     /// This is a test class for Player and is intended
     /// to contain all Player Unit Tests
     /// </summary>
-    [TestClass()]
+    [TestClass]
     public class PlayerTest
     {
         [TestMethod]
@@ -77,7 +77,7 @@ namespace Labyrinth.Test
             Player player1 = new Player(name1, movesCount1);
 
             string name2 = "Deborah Morgan";
-            int movesCount2 = Engine.LABYRINTH_SIZE / 2 + 1;
+            int movesCount2 = (Engine.LABYRINTH_SIZE / 2) + 1;
             Player player2 = new Player(name2, movesCount2);
 
             int result = player1.CompareTo(player2);
@@ -88,7 +88,7 @@ namespace Labyrinth.Test
         public void CompareToPlayerWithLessMovesCount()
         {
             string name1 = "Dexter Morgan";
-            int movesCount1 = Engine.LABYRINTH_SIZE / 2 + 1;
+            int movesCount1 = (Engine.LABYRINTH_SIZE / 2) + 1;
             Player player1 = new Player(name1, movesCount1);
 
             string name2 = "Deborah Morgan";
