@@ -17,8 +17,8 @@ namespace Labyrinth
         public const char WALL_CELL = 'X';
         public const char PLAYER = '*';
         private const char VISITED = 'v';
-        private readonly int startRow = LABYRINTH_SIZE / 2;
-        private readonly int startColumn = LABYRINTH_SIZE / 2;
+        private readonly int StartRow = LABYRINTH_SIZE / 2;
+        private readonly int StartColumn = LABYRINTH_SIZE / 2;
         private Cell[,] labyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
         private Cell[,] dummyLabyrinth = new Cell[LABYRINTH_SIZE, LABYRINTH_SIZE];
         private Random rand = new Random();      
@@ -28,7 +28,7 @@ namespace Labyrinth
         /// </summary>
         public Engine()
         {
-            this.CurrentCell = new Cell(this.startRow, this.startColumn, PLAYER);
+            this.CurrentCell = new Cell(this.StartRow, this.StartColumn, PLAYER);
             this.GenerateLabyrinth();
         }
 
@@ -133,8 +133,8 @@ namespace Labyrinth
                 }
             }
 
-            this.labyrinth[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn, PLAYER);
-            this.dummyLabyrinth[this.startRow, this.startColumn] = new Cell(this.startRow, this.startColumn, PLAYER);
+            this.labyrinth[this.StartRow, this.StartColumn] = new Cell(this.StartRow, this.StartColumn, PLAYER);
+            this.dummyLabyrinth[this.StartRow, this.StartColumn] = new Cell(this.StartRow, this.StartColumn, PLAYER);
         }
 
         /// <summary>

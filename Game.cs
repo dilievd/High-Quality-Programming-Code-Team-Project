@@ -19,6 +19,7 @@ namespace Labyrinth
         {
             if (scoreboard == null)
             {
+
                 throw new ArgumentNullException(
                     "Invalid input! Scoreboard cannot be null.");
             }
