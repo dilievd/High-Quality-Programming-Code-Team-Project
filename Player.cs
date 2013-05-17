@@ -5,7 +5,7 @@ namespace Labyrinth
     /// <summary>
     /// Represent a player in the game
     /// </summary>
-    public class Player: IComparable<Player>
+    public class Player : IComparable<Player>
     {
         private string name;
         private int movesCount;
@@ -27,7 +27,7 @@ namespace Labyrinth
         /// </summary>
         /// <exception cref="ArgumentNullException">
         /// If the name is null or empty string</exception>
-        public string Name 
+        public string Name
         {
             get
             {
@@ -36,7 +36,7 @@ namespace Labyrinth
 
             private set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException(
                         "Invalid input! Name cannot be null or empty!");
@@ -62,7 +62,7 @@ namespace Labyrinth
             {
                 if (value < Engine.LABYRINTH_SIZE / 2)
                 {
-                    throw new ArgumentException("Can not escape from labyrinth in " + 
+                    throw new ArgumentException("Can not escape from labyrinth in " +
                         "less moves than the shortest distance from center of the labyrinth!");
                 }
 
