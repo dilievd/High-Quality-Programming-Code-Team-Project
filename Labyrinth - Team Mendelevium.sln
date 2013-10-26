@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labyrinth", "Labyrinth\Labyrinth.csproj", "{3F194B31-5375-4D99-8746-11D9BA1241F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labyrinth.Test", "Labyrinth.Test\Labyrinth.Test.csproj", "{10F72183-A903-43B3-AF30-C399D12FDBC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F194B31-5375-4D99-8746-11D9BA1241F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F194B31-5375-4D99-8746-11D9BA1241F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F194B31-5375-4D99-8746-11D9BA1241F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F194B31-5375-4D99-8746-11D9BA1241F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F72183-A903-43B3-AF30-C399D12FDBC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F72183-A903-43B3-AF30-C399D12FDBC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F72183-A903-43B3-AF30-C399D12FDBC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F72183-A903-43B3-AF30-C399D12FDBC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

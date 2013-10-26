@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Labyrinth.Test")]
+[assembly: AssemblyTitle("Labyrinth")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Labyrinth.Test")]
+[assembly: AssemblyProduct("Labyrinth")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("97eb71ce-9f73-44b3-a6e5-ca04189a29c1")]
+[assembly: Guid("a4c7020c-af8d-4e63-aeff-fd1e376369a5")]
 
 // Version information for an assembly consists of the following four values:
 //
